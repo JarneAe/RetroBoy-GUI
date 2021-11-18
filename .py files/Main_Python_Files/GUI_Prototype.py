@@ -10,7 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
-
+import subprocess
+import webbrowser
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -89,6 +90,14 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.ButtonRetro.clicked.connect(self.OpenRetro)
+        self.ButtonRasp.clicked.connect(self.GoToDesktop)
+        self.ButtonFire.clicked.connect(self.OpenFire)
+        self.ButtenNet.clicked.connect(self.OpenNetflix)
+        self.ButtonDisney.clicked.connect(self.OpenDisney)
+        self.ButtonYT.clicked.connect(self.OpenYoutube)
+        self.ButtonExit.clicked.connect(self.ShutdownDevice)
+        
+
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -97,22 +106,22 @@ class Ui_MainWindow(object):
         os.startfile("C:\\Users\\JarneA408\\AppData\\Roaming\\RetroArch\\retroarch.exe")
 
     def OpenFire(self):
-        pass
+        os.startfile("C:\\Program Files\\Mozilla Firefox\\firefox.exe")
 
     def GoToDesktop(self):
         pass
 
     def OpenNetflix(self):
-        pass
+        webbrowser.open('https://Netflix.com')
 
     def OpenDisney(self):
-        pass
+        webbrowser.open('https://Disneyplus.com')
 
     def OpenYoutube(self):
-        pass
+        webbrowser.open('https://Youtube.com')
 
     def ShutdownDevice(self):
-        os.system('shutdown /s /t 1')
+        os.system("shutdown /s /t 1")
 
 
     def retranslateUi(self, MainWindow):
