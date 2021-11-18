@@ -97,8 +97,6 @@ class Ui_MainWindow(object):
         self.ButtonYT.clicked.connect(self.OpenYoutube)
         self.ButtonExit.clicked.connect(self.ShutdownDevice)
         
-
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
