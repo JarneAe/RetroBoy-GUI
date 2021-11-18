@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>773</width>
+    <height>567</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="ButtonRetro">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>70</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../../../../../Pictures/retro.png</normaloff>../../../../../../../Pictures/retro.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>256</width>
+      <height>256</height>
+     </size>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonFire">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>70</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../../../../../Pictures/firefox.jpg</normaloff>../../../../../../../Pictures/firefox.jpg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>256</width>
+      <height>256</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonRasp">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>70</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../../../../../Pictures/Raspi-PGB001.webp</normaloff>../../../../../../../Pictures/Raspi-PGB001.webp</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>256</width>
+      <height>256</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtenNet">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>280</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../../../../../Pictures/netflix-png-icon-19.png</normaloff>../../../../../../../Pictures/netflix-png-icon-19.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>256</width>
+      <height>256</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonDisney">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>280</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../../../../../Pictures/apps.9878.14495311847124170.294fed91-ba37-4b8a-83dc-b4098d97cebb.df2390ec-16fb-4849-a952-5f4780c309bd.png</normaloff>../../../../../../../Pictures/apps.9878.14495311847124170.294fed91-ba37-4b8a-83dc-b4098d97cebb.df2390ec-16fb-4849-a952-5f4780c309bd.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>256</width>
+      <height>256</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonYT">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>280</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../../../../../Pictures/unnamed.png</normaloff>../../../../../../../Pictures/unnamed.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>256</width>
+      <height>256</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonExit">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>480</y>
+      <width>51</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../../../../../../Pictures/31784.png</normaloff>../../../../../../../Pictures/31784.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>36</width>
+      <height>180</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>773</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
