@@ -1,14 +1,25 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import webbrowser
-from PyQt5.QtWidgets import QMessageBox
-
+from PyQt5.QtWidgets import QMessageBox,QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
+from PyQt5.QtCore import QTimer,QDateTime
+import datetime
+from datetime import date
+import time
+import sys
+from PyQt5.QtWidgets import QApplication, QLabel
+from PyQt5.QtCore import Qt,QTimer
+    
+    
 class Ui_GUI(object):
     def setupUi(self, GUI):
+
+        
+
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
         GUI.setAutoFillBackground(False)
-        GUI.setStyleSheet("background-color: grey;")
+        GUI.setStyleSheet("background-color:rgb(71, 82, 99);")
         self.centralwidget = QtWidgets.QWidget(GUI)
         self.centralwidget.setObjectName("centralwidget")
         self.ButtonRetro = QtWidgets.QPushButton(self.centralwidget)
@@ -16,11 +27,13 @@ class Ui_GUI(object):
         self.ButtonRetro.setAutoFillBackground(False)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("Images\\retro.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        #Button for emulator
         self.ButtonRetro.setIcon(icon)
         self.ButtonRetro.setIconSize(QtCore.QSize(256, 256))
         self.ButtonRetro.setCheckable(False)
         self.ButtonRetro.setAutoExclusive(False)
         self.ButtonRetro.setObjectName("ButtonRetro")
+        #Button for firefox
         self.ButtonFire = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonFire.setGeometry(QtCore.QRect(270, 70, 191, 191))
         icon1 = QtGui.QIcon()
@@ -28,6 +41,7 @@ class Ui_GUI(object):
         self.ButtonFire.setIcon(icon1)
         self.ButtonFire.setIconSize(QtCore.QSize(256, 256))
         self.ButtonFire.setObjectName("ButtonFire")
+        #Button for desktop
         self.ButtonRasp = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonRasp.setGeometry(QtCore.QRect(510, 70, 191, 191))
         icon2 = QtGui.QIcon()
@@ -35,6 +49,7 @@ class Ui_GUI(object):
         self.ButtonRasp.setIcon(icon2)
         self.ButtonRasp.setIconSize(QtCore.QSize(256, 256))
         self.ButtonRasp.setObjectName("ButtonRasp")
+        #Button for Netflix
         self.ButtenNet = QtWidgets.QPushButton(self.centralwidget)
         self.ButtenNet.setGeometry(QtCore.QRect(40, 280, 191, 191))
         icon3 = QtGui.QIcon()
@@ -42,6 +57,7 @@ class Ui_GUI(object):
         self.ButtenNet.setIcon(icon3)
         self.ButtenNet.setIconSize(QtCore.QSize(256, 256))
         self.ButtenNet.setObjectName("ButtenNet")
+        #Button for disney+
         self.ButtonDisney = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonDisney.setGeometry(QtCore.QRect(270, 280, 191, 191))
         icon4 = QtGui.QIcon()
@@ -49,6 +65,7 @@ class Ui_GUI(object):
         self.ButtonDisney.setIcon(icon4)
         self.ButtonDisney.setIconSize(QtCore.QSize(256, 256))
         self.ButtonDisney.setObjectName("ButtonDisney")
+        #Button for youtube
         self.ButtonYT = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonYT.setGeometry(QtCore.QRect(510, 280, 191, 191))
         icon5 = QtGui.QIcon()
@@ -56,6 +73,7 @@ class Ui_GUI(object):
         self.ButtonYT.setIcon(icon5)
         self.ButtonYT.setIconSize(QtCore.QSize(256, 256))
         self.ButtonYT.setObjectName("ButtonYT")
+        #Button for shutdown
         self.ButtonExit = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonExit.setGeometry(QtCore.QRect(700, 480, 51, 41))
         icon6 = QtGui.QIcon()
@@ -64,15 +82,31 @@ class Ui_GUI(object):
         self.ButtonExit.setIconSize(QtCore.QSize(36, 180))
         self.ButtonExit.setObjectName("ButtonExit")
         self.ButtonExit.setStyleSheet("background-color: white")
-        GUI.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(GUI)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 773, 21))
-        self.menubar.setObjectName("menubar")
-        GUI.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(GUI)
-        self.statusbar.setObjectName("statusbar")
-        GUI.setStatusBar(self.statusbar)
+        #Time display
+        self.Time = QtWidgets.QLabel(self.centralwidget)
+        
+        self.Time.setGeometry(QtCore.QRect(700, 0, 47, 13))
+        self.Time.setText(self.clock())
+        self.Time.setFont(QtGui.QFont('Arial',12))
+        self.Time.adjustSize()
+        self.Time.setObjectName("Time")
+        #Date display
+        self.Date = QtWidgets.QLabel(self.centralwidget)
+        self.Date.setGeometry(QtCore.QRect(600, 0, 47, 13))
+        self.Date.setText(str(date.today()))
+        self.Date.setObjectName("Date")
+        self.Date.setFont(QtGui.QFont('Arial',12))
+        self.Date.adjustSize()
 
+
+        self.timer=QTimer()
+        self.timer.start(200)
+        self.timer.timeout.connect(self.clock)
+
+
+        GUI.setCentralWidget(self.centralwidget)
+
+        #connection setup
         self.ButtonRetro.clicked.connect(self.OpenRetro)
         self.ButtonRasp.clicked.connect(self.GoToDesktop)
         self.ButtonFire.clicked.connect(self.OpenFire)
@@ -84,6 +118,11 @@ class Ui_GUI(object):
         self.retranslateUi(GUI)
         QtCore.QMetaObject.connectSlotsByName(GUI)
 
+    def clock(self):
+        while True:
+            self.Time.setText(str(datetime.datetime.now().strftime("%H:%M:%S")))
+            timetext = str(datetime.datetime.now().strftime("%H:%M:%S"))
+            return timetext
 
     def OpenRetro(self):
         os.startfile("C:\\Users\\JarneA408\\AppData\\Roaming\\RetroArch\\retroarch.exe")
@@ -106,7 +145,6 @@ class Ui_GUI(object):
     def ShutdownDevice(self):
         os.system("shutdown /s /t 1")
 
-
     def retranslateUi(self, GUI):
         _translate = QtCore.QCoreApplication.translate
         GUI.setWindowTitle(_translate("GUI", "GUI"))
@@ -122,6 +160,8 @@ class Ui_GUI(object):
         msg.buttonClicked.connect(self.popup_button)
 
         x = msg.exec_()
+    
+    
 
     def popup_button(self,i):
         print(i.text())

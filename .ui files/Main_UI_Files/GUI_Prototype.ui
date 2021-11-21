@@ -17,8 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="ButtonRetro">
@@ -38,7 +37,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../../../../../Pictures/retro.png</normaloff>../../../../../../../Pictures/retro.png</iconset>
+      <normaloff>../../../Pictures/retro.png</normaloff>../../../Pictures/retro.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -67,7 +66,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../../../../../Pictures/firefox.jpg</normaloff>../../../../../../../Pictures/firefox.jpg</iconset>
+      <normaloff>../../../Pictures/firefox.jpg</normaloff>../../../Pictures/firefox.jpg</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -90,7 +89,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../../../../../Pictures/Raspi-PGB001.webp</normaloff>../../../../../../../Pictures/Raspi-PGB001.webp</iconset>
+      <normaloff>../../../Pictures/Raspi-PGB001.webp</normaloff>../../../Pictures/Raspi-PGB001.webp</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -113,7 +112,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../../../../../Pictures/netflix-png-icon-19.png</normaloff>../../../../../../../Pictures/netflix-png-icon-19.png</iconset>
+      <normaloff>../../../Pictures/netflix-png-icon-19.png</normaloff>../../../Pictures/netflix-png-icon-19.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -136,7 +135,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../../../../../Pictures/apps.9878.14495311847124170.294fed91-ba37-4b8a-83dc-b4098d97cebb.df2390ec-16fb-4849-a952-5f4780c309bd.png</normaloff>../../../../../../../Pictures/apps.9878.14495311847124170.294fed91-ba37-4b8a-83dc-b4098d97cebb.df2390ec-16fb-4849-a952-5f4780c309bd.png</iconset>
+      <normaloff>../../../Pictures/apps.9878.14495311847124170.294fed91-ba37-4b8a-83dc-b4098d97cebb.df2390ec-16fb-4849-a952-5f4780c309bd.png</normaloff>../../../Pictures/apps.9878.14495311847124170.294fed91-ba37-4b8a-83dc-b4098d97cebb.df2390ec-16fb-4849-a952-5f4780c309bd.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -159,7 +158,7 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../../../../../Pictures/unnamed.png</normaloff>../../../../../../../Pictures/unnamed.png</iconset>
+      <normaloff>../../../Pictures/unnamed.png</normaloff>../../../Pictures/unnamed.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -182,13 +181,39 @@
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../../../../../../../Pictures/31784.png</normaloff>../../../../../../../Pictures/31784.png</iconset>
+      <normaloff>../../../Pictures/31784.png</normaloff>../../../Pictures/31784.png</iconset>
     </property>
     <property name="iconSize">
      <size>
       <width>36</width>
       <height>180</height>
      </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Time">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>0</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Date">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>0</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
