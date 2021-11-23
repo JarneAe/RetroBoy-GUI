@@ -14,20 +14,19 @@ from PyQt5.QtCore import Qt,QTimer
 class Ui_GUI(object):
     def setupUi(self, GUI):
 
-        
-
+        GUI.setWindowIcon(QtGui.QIcon('Images\\retro.png'))
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
         GUI.setAutoFillBackground(False)
         GUI.setStyleSheet("background-color:rgb(71, 82, 99);")
         self.centralwidget = QtWidgets.QWidget(GUI)
         self.centralwidget.setObjectName("centralwidget")
+        #Button for emulator
         self.ButtonRetro = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonRetro.setGeometry(QtCore.QRect(40, 70, 191, 191))
         self.ButtonRetro.setAutoFillBackground(False)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("Images\\retro.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        #Button for emulator
         self.ButtonRetro.setIcon(icon)
         self.ButtonRetro.setIconSize(QtCore.QSize(256, 256))
         self.ButtonRetro.setCheckable(False)
@@ -103,7 +102,6 @@ class Ui_GUI(object):
         self.timer.start(200)
         self.timer.timeout.connect(self.clock)
 
-
         GUI.setCentralWidget(self.centralwidget)
 
         #connection setup
@@ -123,6 +121,7 @@ class Ui_GUI(object):
             self.Time.setText(str(datetime.datetime.now().strftime("%H:%M:%S")))
             timetext = str(datetime.datetime.now().strftime("%H:%M:%S"))
             return timetext
+            
 
     def OpenRetro(self):
         os.startfile("C:\\Users\\JarneA408\\AppData\\Roaming\\RetroArch\\retroarch.exe")
@@ -161,8 +160,6 @@ class Ui_GUI(object):
 
         x = msg.exec_()
     
-    
-
     def popup_button(self,i):
         print(i.text())
 
