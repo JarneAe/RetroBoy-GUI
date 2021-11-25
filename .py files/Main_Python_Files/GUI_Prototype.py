@@ -102,6 +102,15 @@ class Ui_GUI(object):
         self.timer.start(200)
         self.timer.timeout.connect(self.clock)
 
+        self.ButtonSettings = QtWidgets.QPushButton(self.centralwidget)
+        self.ButtonSettings.setGeometry(QtCore.QRect(630, 480, 51, 41))
+        self.ButtonSettings.setText("")
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap("Images\\SettingsIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ButtonSettings.setIcon(icon7)
+        self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
+        self.ButtonSettings.setObjectName("ButtonSettings")
+
         GUI.setCentralWidget(self.centralwidget)
 
         #connection setup
@@ -122,7 +131,6 @@ class Ui_GUI(object):
             timetext = str(datetime.datetime.now().strftime("%H:%M:%S"))
             return timetext
             
-
     def OpenRetro(self):
         os.startfile("C:\\Users\\JarneA408\\AppData\\Roaming\\RetroArch\\retroarch.exe")
 
