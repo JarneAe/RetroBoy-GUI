@@ -5,22 +5,30 @@ from PyQt5.QtWidgets import QMessageBox,QWidget,QPushButton,QApplication,QListWi
 from PyQt5.QtCore import QTimer,QDateTime
 import datetime
 from datetime import date
-import time
 import sys
 from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtCore import Qt,QTimer
-    
+from Main_Settings import *
+
     
 class Ui_GUI(object):
+
+    def openSettings(self):
+        self.window = QtWidgets.QWidget()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+
     def setupUi(self, GUI):
 
-        GUI.setWindowIcon(QtGui.QIcon('Images\\retro.png'))
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
         GUI.setAutoFillBackground(False)
-        GUI.setStyleSheet("background-color:rgb(71, 82, 99);")
+        GUI.setStyleSheet(SelectedColor)
         self.centralwidget = QtWidgets.QWidget(GUI)
         self.centralwidget.setObjectName("centralwidget")
+
         #Button for emulator
         self.ButtonRetro = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonRetro.setGeometry(QtCore.QRect(40, 70, 191, 191))
@@ -32,6 +40,7 @@ class Ui_GUI(object):
         self.ButtonRetro.setCheckable(False)
         self.ButtonRetro.setAutoExclusive(False)
         self.ButtonRetro.setObjectName("ButtonRetro")
+
         #Button for firefox
         self.ButtonFire = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonFire.setGeometry(QtCore.QRect(270, 70, 191, 191))
@@ -40,6 +49,7 @@ class Ui_GUI(object):
         self.ButtonFire.setIcon(icon1)
         self.ButtonFire.setIconSize(QtCore.QSize(256, 256))
         self.ButtonFire.setObjectName("ButtonFire")
+
         #Button for desktop
         self.ButtonRasp = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonRasp.setGeometry(QtCore.QRect(510, 70, 191, 191))
@@ -48,6 +58,7 @@ class Ui_GUI(object):
         self.ButtonRasp.setIcon(icon2)
         self.ButtonRasp.setIconSize(QtCore.QSize(256, 256))
         self.ButtonRasp.setObjectName("ButtonRasp")
+
         #Button for Netflix
         self.ButtenNet = QtWidgets.QPushButton(self.centralwidget)
         self.ButtenNet.setGeometry(QtCore.QRect(40, 280, 191, 191))
@@ -56,6 +67,7 @@ class Ui_GUI(object):
         self.ButtenNet.setIcon(icon3)
         self.ButtenNet.setIconSize(QtCore.QSize(256, 256))
         self.ButtenNet.setObjectName("ButtenNet")
+
         #Button for disney+
         self.ButtonDisney = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonDisney.setGeometry(QtCore.QRect(270, 280, 191, 191))
@@ -64,6 +76,7 @@ class Ui_GUI(object):
         self.ButtonDisney.setIcon(icon4)
         self.ButtonDisney.setIconSize(QtCore.QSize(256, 256))
         self.ButtonDisney.setObjectName("ButtonDisney")
+
         #Button for youtube
         self.ButtonYT = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonYT.setGeometry(QtCore.QRect(510, 280, 191, 191))
@@ -72,6 +85,7 @@ class Ui_GUI(object):
         self.ButtonYT.setIcon(icon5)
         self.ButtonYT.setIconSize(QtCore.QSize(256, 256))
         self.ButtonYT.setObjectName("ButtonYT")
+
         #Button for shutdown
         self.ButtonExit = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonExit.setGeometry(QtCore.QRect(700, 480, 51, 41))
@@ -81,14 +95,20 @@ class Ui_GUI(object):
         self.ButtonExit.setIconSize(QtCore.QSize(36, 180))
         self.ButtonExit.setObjectName("ButtonExit")
         self.ButtonExit.setStyleSheet("background-color: white")
+
         #Time display
         self.Time = QtWidgets.QLabel(self.centralwidget)
-        
         self.Time.setGeometry(QtCore.QRect(700, 0, 47, 13))
         self.Time.setText(self.clock())
         self.Time.setFont(QtGui.QFont('Arial',12))
         self.Time.adjustSize()
         self.Time.setObjectName("Time")
+
+        self.timer=QTimer()
+        self.timer.start(200)
+        self.timer.timeout.connect(self.clock)
+
+
         #Date display
         self.Date = QtWidgets.QLabel(self.centralwidget)
         self.Date.setGeometry(QtCore.QRect(600, 0, 47, 13))
@@ -97,11 +117,7 @@ class Ui_GUI(object):
         self.Date.setFont(QtGui.QFont('Arial',12))
         self.Date.adjustSize()
 
-
-        self.timer=QTimer()
-        self.timer.start(200)
-        self.timer.timeout.connect(self.clock)
-
+        #Button settings
         self.ButtonSettings = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonSettings.setGeometry(QtCore.QRect(630, 480, 51, 41))
         self.ButtonSettings.setText("")
@@ -111,6 +127,7 @@ class Ui_GUI(object):
         self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
         self.ButtonSettings.setObjectName("ButtonSettings")
 
+        #assigning widget
         GUI.setCentralWidget(self.centralwidget)
 
         #connection setup
@@ -121,6 +138,7 @@ class Ui_GUI(object):
         self.ButtonDisney.clicked.connect(self.OpenDisney)
         self.ButtonYT.clicked.connect(self.OpenYoutube)
         self.ButtonExit.clicked.connect(self.show_popup)
+        self.ButtonSettings.clicked.connect(self.openSettings)
         
         self.retranslateUi(GUI)
         QtCore.QMetaObject.connectSlotsByName(GUI)
