@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtCore import Qt,QTimer
 from Main_Settings import *
 
-    
+SelectedColor = "background-color:rgb(71, 82, 99);"
 class Ui_GUI(object):
 
     def openSettings(self):
@@ -28,7 +28,7 @@ class Ui_GUI(object):
         GUI.setStyleSheet(SelectedColor)
         self.centralwidget = QtWidgets.QWidget(GUI)
         self.centralwidget.setObjectName("centralwidget")
-
+        
         #Button for emulator
         self.ButtonRetro = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonRetro.setGeometry(QtCore.QRect(40, 70, 191, 191))
@@ -103,7 +103,6 @@ class Ui_GUI(object):
         self.Time.setFont(QtGui.QFont('Arial',12))
         self.Time.adjustSize()
         self.Time.setObjectName("Time")
-
         self.timer=QTimer()
         self.timer.start(200)
         self.timer.timeout.connect(self.clock)

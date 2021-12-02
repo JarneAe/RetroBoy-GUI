@@ -1,5 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+global SelectedColor 
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -17,6 +19,7 @@ class Ui_Form(object):
         self.ColorBox.setObjectName("ColorBox")
         self.ColorBox.addItem("")
         self.ColorBox.addItem("")
+    
 
         self.DateLabel = QtWidgets.QLabel(Form)
         self.DateLabel.setGeometry(QtCore.QRect(230, 190, 61, 16))
@@ -75,13 +78,12 @@ class Ui_Form(object):
             print("Dark")
         else:
             SelectedColor = "background-color:rgb(232, 230, 223);"
-            print("White")
+            print("Light")
 
         SelectedDateFormat = self.DateBox.currentText()
         print(SelectedDateFormat)
         SelectedHour = self.HourBox.currentText()
         print(SelectedHour)
-
         return SelectedColor,SelectedDateFormat,SelectedHour
         
 
@@ -92,6 +94,7 @@ class Ui_Form(object):
         self.ColorLabel.setText(_translate("Form", "Color mode"))
         self.ColorBox.setItemText(0, _translate("Form", "Dark"))
         self.ColorBox.setItemText(1, _translate("Form", "Light"))
+    
 
         self.DateLabel.setText(_translate("Form", "Date Format"))
         self.DateBox.setItemText(0, _translate("Form", "Day/Month/Year"))
