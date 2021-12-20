@@ -194,6 +194,12 @@ class Ui_GUI(object):
         else:
             pass
 
+    def RefreshGUI(self):
+        GUI = QtWidgets.QMainWindow()
+        Ui_GUI.setupUi(self,GUI)
+
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

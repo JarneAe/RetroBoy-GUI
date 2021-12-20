@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from GUI_Prototype import Ui_GUI
 global SelectedColor 
+
 
 
 class Ui_Form(object):
@@ -84,6 +85,7 @@ class Ui_Form(object):
         print(SelectedDateFormat)
         SelectedHour = self.HourBox.currentText()
         print(SelectedHour)
+        Ui_GUI.RefreshGUI(self)
         return SelectedColor,SelectedDateFormat,SelectedHour
         
 
