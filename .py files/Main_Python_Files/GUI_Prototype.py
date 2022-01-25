@@ -117,14 +117,14 @@ class Ui_GUI(object):
         self.Date.adjustSize()
 
         #Button settings
-        self.ButtonSettings = QtWidgets.QPushButton(self.centralwidget)
-        self.ButtonSettings.setGeometry(QtCore.QRect(630, 480, 51, 41))
-        self.ButtonSettings.setText("")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("Images\\SettingsIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.ButtonSettings.setIcon(icon7)
-        self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
-        self.ButtonSettings.setObjectName("ButtonSettings")
+    # #self.ButtonSettings = QtWidgets.QPushButton(self.centralwidget)
+        #self.ButtonSettings.setGeometry(QtCore.QRect(630, 480, 51, 41))
+        #self.ButtonSettings.setText("")
+        #icon7 = QtGui.QIcon()
+        #icon7.addPixmap(QtGui.QPixmap("Images\\SettingsIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        #self.ButtonSettings.setIcon(icon7)
+        #self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
+        #self.ButtonSettings.setObjectName("ButtonSettings")
 
         #assigning widget
         GUI.setCentralWidget(self.centralwidget)
@@ -137,7 +137,7 @@ class Ui_GUI(object):
         self.ButtonDisney.clicked.connect(self.OpenDisney)
         self.ButtonYT.clicked.connect(self.OpenYoutube)
         self.ButtonExit.clicked.connect(self.show_popup)
-        self.ButtonSettings.clicked.connect(self.openSettings)
+        #self.ButtonSettings.clicked.connect(self.openSettings)
         
         self.retranslateUi(GUI)
         QtCore.QMetaObject.connectSlotsByName(GUI)
