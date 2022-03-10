@@ -88,7 +88,7 @@ class Ui_Form(object):
         json_object = json.load(TargetFile)
         json_object["BColor"] = BColor
         json_object["Date"] = DateFormat
-        
+
         TargetFile.close()
         print(json_object)
 
@@ -98,12 +98,7 @@ class Ui_Form(object):
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
 
-
-
-
-        print("testUpdate")
         
-
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))

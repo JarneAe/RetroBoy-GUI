@@ -15,9 +15,6 @@ import json
 #Reads json file and loads it to something readable
 with open(".py_files\MainPythonFiles\Settings.json") as json_file:
     data = json.load(json_file)
-    print(data["BColor"])
-    print(type(data))
-
 
 class Ui_GUI(object):
 
