@@ -1,7 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import json
 from GUI_Prototype import Ui_GUI
-from SettingsSelector import SelectedColor
+from SettingsSelector import SelectedColor,DateFormat,TimeFormat
+from datetime import date, datetime
 
 class Ui_Form(object):
 
@@ -21,8 +22,16 @@ class Ui_Form(object):
         self.ColorBox.addItem("")
         self.ColorBox.addItem("")
         self.ColorBox.addItem("")
-    
 
+    
+        if SelectedColor == "background-color:rgb(71, 82, 99);":
+            self.ColorBox.setCurrentIndex(0)
+        elif SelectedColor == "background-color:rgb(215, 227, 245);":
+            self.ColorBox.setCurrentIndex(1)
+        elif SelectedColor == "background-color:rgb(220,20,60);":
+            self.ColorBox.setCurrentIndex(2)
+
+        
         self.DateLabel = QtWidgets.QLabel(Form)
         self.DateLabel.setGeometry(QtCore.QRect(230, 190, 61, 16))
         self.DateLabel.setObjectName("DateLabel")
@@ -33,15 +42,31 @@ class Ui_Form(object):
         self.DateBox.addItem("")
         self.DateBox.addItem("")
 
+        now = datetime.now()
+
+
+        if DateFormat == now.strftime("%d-%m-%y"):
+            self.DateBox.setCurrentIndex(0)
+        else:
+            self.DateBox.setCurrentIndex(1)
+
+
         self.HourLabel = QtWidgets.QLabel(Form)
         self.HourLabel.setGeometry(QtCore.QRect(230, 240, 61, 16))
         self.HourLabel.setObjectName("HourLabel")
+
 
         self.HourBox = QtWidgets.QComboBox(Form)
         self.HourBox.setGeometry(QtCore.QRect(310, 240, 101, 22))
         self.HourBox.setObjectName("HourBox")
         self.HourBox.addItem("")
         self.HourBox.addItem("")
+
+        if TimeFormat == "%I:%M %p":
+            self.HourBox.setCurrentIndex(0)
+        else:
+            self.HourBox.setCurrentIndex(1)
+
 
         self.BackButton = QtWidgets.QPushButton(Form)
         self.BackButton.setGeometry(QtCore.QRect(10, 10, 41, 41))
@@ -85,11 +110,14 @@ class Ui_Form(object):
         
         DateFormat = self.DateBox.currentText()
 
+        TimeFormat = self.HourBox.currentText()
+
         TargetFile = open("json_files\Settings.json","r")
         json_object = json.load(TargetFile)
         json_object["BColor"] = BColor
         json_object["Date"] = DateFormat
-
+        json_object["Time"] = TimeFormat
+        
         TargetFile.close()
         print(json_object)
 

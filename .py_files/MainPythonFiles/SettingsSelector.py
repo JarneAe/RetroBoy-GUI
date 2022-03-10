@@ -29,3 +29,8 @@ with open("json_files\Settings.json") as json_file:
     else:
         DateFormat = now.strftime("%m-%d-%y")
     
+    if data["Time"] == "AM/PM":
+        TimeFormat = "%I:%M %p"
+    else:
+        TimeFormat = "%H:%M:%S"
+    

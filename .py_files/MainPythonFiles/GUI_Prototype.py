@@ -1,17 +1,15 @@
-from tkinter.tix import Select
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import webbrowser
 from PyQt5.QtWidgets import QMessageBox,QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
 from PyQt5.QtCore import QTimer,QDateTime
-import datetime
 from datetime import date, datetime
 import sys
 from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtCore import Qt,QTimer
 from Main_Settings import *
 import json
-from SettingsSelector import SelectedColor,DateFormat
+from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 
 class Ui_GUI(object):
 
@@ -149,8 +147,8 @@ class Ui_GUI(object):
 
     def clock(self):
         while True:
-            self.Time.setText(str(datetime.now().strftime("%H:%M:%S")))
-            timetext = str(datetime.now().strftime("%H:%M:%S"))
+            self.Time.setText(str(datetime.now().strftime(TimeFormat)))
+            timetext = str(datetime.now().strftime(TimeFormat))
             return timetext
             
     def OpenRetro(self):
