@@ -1,14 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from GUI_Prototype import Ui_GUI
 import json
-
-
-
+from GUI_Prototype import Ui_GUI
+from SettingsSelector import SelectedColor
 
 class Ui_Form(object):
+
     def setupUi(self, Form):
 
-        Form.setStyleSheet("background-color:rgb(71, 82, 99);")
+        Form.setStyleSheet(SelectedColor)
         Form.setObjectName("Form")
         Form.resize(661, 500)
 
@@ -78,13 +77,15 @@ class Ui_Form(object):
 
         
 
+        
+
     def UpdateSettings(self):
         print(self.ColorBox.currentText())
         BColor = self.ColorBox.currentText()
         
         DateFormat = self.DateBox.currentText()
 
-        TargetFile = open(".py_files\MainPythonFiles\Settings.json","r")
+        TargetFile = open("json_files\Settings.json","r")
         json_object = json.load(TargetFile)
         json_object["BColor"] = BColor
         json_object["Date"] = DateFormat
@@ -92,7 +93,7 @@ class Ui_Form(object):
         TargetFile.close()
         print(json_object)
 
-        TargetFile = open(".py_files\MainPythonFiles\Settings.json",'w')
+        TargetFile = open("json_files\Settings.json",'w')
         json.dump(json_object,TargetFile)
         TargetFile.close()
         self.label.setText(("Changes will be applied after the app has been restarted."))
