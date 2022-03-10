@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from GUI_Prototype import Ui_GUI
- 
-global SelectedColor 
+import json
+
 
 
 
@@ -19,6 +19,7 @@ class Ui_Form(object):
         self.ColorBox = QtWidgets.QComboBox(Form)
         self.ColorBox.setGeometry(QtCore.QRect(310, 140, 101, 22))
         self.ColorBox.setObjectName("ColorBox")
+        self.ColorBox.addItem("")
         self.ColorBox.addItem("")
         self.ColorBox.addItem("")
     
@@ -64,6 +65,10 @@ class Ui_Form(object):
         self.UpdateButton.setGeometry(QtCore.QRect(250, 460, 111, 23))
         self.UpdateButton.setObjectName("UpdateButton")
 
+        self.label = QtWidgets.QLabel(Form)
+        self.label.setGeometry(QtCore.QRect(180, 50, 47, 13))
+        self.label.setObjectName("label")
+
 
         self.BackButton.clicked.connect(lambda: Form.close())
         self.UpdateButton.clicked.connect(self.UpdateSettings)
@@ -74,20 +79,29 @@ class Ui_Form(object):
         
 
     def UpdateSettings(self):
-        SelectedColor = self.ColorBox.currentText()
-        if self.ColorBox.currentText() == "Dark":
-            SelectedColor = "background-color:rgb(71, 82, 99);"
-            print("Dark")
-        else:
-            SelectedColor = "background-color:rgb(232, 230, 223);"
-            print("Light")
+        print(self.ColorBox.currentText())
+        BColor = self.ColorBox.currentText()
+        
+        DateFormat = self.DateBox.currentText()
 
-        SelectedDateFormat = self.DateBox.currentText()
-        print(SelectedDateFormat)
-        SelectedHour = self.HourBox.currentText()
-        print(SelectedHour)
-        Ui_GUI.RefreshGUI(self)
-        return SelectedColor,SelectedDateFormat,SelectedHour
+        TargetFile = open(".py_files\MainPythonFiles\Settings.json","r")
+        json_object = json.load(TargetFile)
+        json_object["BColor"] = BColor
+        json_object["Date"] = DateFormat
+        
+        TargetFile.close()
+        print(json_object)
+
+        TargetFile = open(".py_files\MainPythonFiles\Settings.json",'w')
+        json.dump(json_object,TargetFile)
+        TargetFile.close()
+        self.label.setText(("Changes will be applied after the app has been restarted."))
+        self.label.adjustSize()
+
+
+
+
+        print("testUpdate")
         
 
     def retranslateUi(self, Form):
@@ -97,7 +111,7 @@ class Ui_Form(object):
         self.ColorLabel.setText(_translate("Form", "Color mode"))
         self.ColorBox.setItemText(0, _translate("Form", "Dark"))
         self.ColorBox.setItemText(1, _translate("Form", "Light"))
-    
+        self.ColorBox.setItemText(2, _translate("Form", "Pink"))
 
         self.DateLabel.setText(_translate("Form", "Date Format"))
         self.DateBox.setItemText(0, _translate("Form", "Day/Month/Year"))
@@ -108,6 +122,8 @@ class Ui_Form(object):
         self.HourBox.setItemText(1, _translate("Form", "24 Hours"))
 
         self.UpdateButton.setText(_translate("Form", "Update Settings"))
+
+        self.label.setText(_translate("Form", ""))
 
 
 if __name__ == "__main__":
