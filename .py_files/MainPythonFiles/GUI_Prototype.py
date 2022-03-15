@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt,QTimer
 from Main_Settings import *
 import json
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
+from SnakeScoreGetter import SnakeScore
 
 class Ui_GUI(object):
 
@@ -21,6 +22,9 @@ class Ui_GUI(object):
 
 
     def setupUi(self, GUI):
+
+
+        
         
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
@@ -126,6 +130,22 @@ class Ui_GUI(object):
         self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
         self.ButtonSettings.setObjectName("ButtonSettings")
 
+
+
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(10, 10, 111, 16))
+        self.label.setObjectName("label")
+
+
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(115, 12, 47, 13))
+        self.label_2.setObjectName("label_2")
+
+
+
+
+        self.label_2.setText(SnakeScore)
+
         #assigning widget
         GUI.setCentralWidget(self.centralwidget)
 
@@ -175,6 +195,8 @@ class Ui_GUI(object):
     def retranslateUi(self, GUI):
         _translate = QtCore.QCoreApplication.translate
         GUI.setWindowTitle(_translate("GUI", "GUI"))
+        self.label.setText(_translate("MainWindow", "Recent Snake Score:"))
+        self.label_2.setText(_translate("MainWindow", SnakeScore))
 
     def show_popup(self):
         msg = QMessageBox()
