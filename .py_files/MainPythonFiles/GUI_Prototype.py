@@ -15,6 +15,7 @@ from SnakeScoreGetter import SnakeScore
 class Ui_GUI(object):
 
     def openSettings(self):
+
         self.window = QtWidgets.QWidget()
         self.ui = Ui_Form()
         self.ui.setupUi(self.window)
@@ -23,9 +24,6 @@ class Ui_GUI(object):
 
     def setupUi(self, GUI):
 
-
-        
-        
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
         GUI.setAutoFillBackground(False)
@@ -162,7 +160,6 @@ class Ui_GUI(object):
         self.retranslateUi(GUI)
         QtCore.QMetaObject.connectSlotsByName(GUI)
 
-    
         return SelectedColor
 
     def clock(self):
