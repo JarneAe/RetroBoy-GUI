@@ -8,12 +8,12 @@ import sys
 from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtCore import Qt,QTimer
 from Main_Settings import *
-import json
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 from SnakeScoreGetter import SnakeScore
 
 class Ui_GUI(object):
 
+    #link to the settings widget(other file)
     def openSettings(self):
 
         self.window = QtWidgets.QWidget()
@@ -24,6 +24,7 @@ class Ui_GUI(object):
 
     def setupUi(self, GUI):
 
+        #GUI frame setup
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
         GUI.setAutoFillBackground(False)
@@ -128,8 +129,6 @@ class Ui_GUI(object):
         self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
         self.ButtonSettings.setObjectName("ButtonSettings")
 
-
-
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 111, 16))
         self.label.setObjectName("label")
@@ -138,14 +137,7 @@ class Ui_GUI(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(115, 12, 47, 13))
         self.label_2.setObjectName("label_2")
-
-
-
-
         self.label_2.setText(SnakeScore)
-
-        #assigning widget
-        GUI.setCentralWidget(self.centralwidget)
 
         #connection setup
         self.ButtonRetro.clicked.connect(self.OpenRetro)
@@ -157,6 +149,9 @@ class Ui_GUI(object):
         self.ButtonExit.clicked.connect(self.show_popup)
         self.ButtonSettings.clicked.connect(self.openSettings)
         
+        #assigning widget
+        GUI.setCentralWidget(self.centralwidget)
+
         self.retranslateUi(GUI)
         QtCore.QMetaObject.connectSlotsByName(GUI)
 
