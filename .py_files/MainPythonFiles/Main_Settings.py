@@ -106,14 +106,16 @@ class Ui_Form(object):
 
     def UpdateSettings(self):
         print(self.ColorBox.currentText())
+
         BColor = self.ColorBox.currentText()
-        
+
         DateFormat = self.DateBox.currentText()
 
         TimeFormat = self.HourBox.currentText()
 
         TargetFile = open("json_files\Settings.json","r")
         json_object = json.load(TargetFile)
+        
         json_object["BColor"] = BColor
         json_object["Date"] = DateFormat
         json_object["Time"] = TimeFormat
