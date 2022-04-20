@@ -1,4 +1,3 @@
-from typing import Final
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import * 
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
@@ -23,6 +22,7 @@ class Ui_Form(object):
         self.ColorBox.addItem("")
         self.ColorBox.addItem("")
         self.ColorBox.addItem("")
+        self.ColorBox.addItem("")
 
     
         if SelectedColor == "background-color:rgb(71, 82, 99);":
@@ -31,6 +31,8 @@ class Ui_Form(object):
             self.ColorBox.setCurrentIndex(1)
         elif SelectedColor == "background-color:rgb(220,20,60);":
             self.ColorBox.setCurrentIndex(2)
+        else:
+            self.ColorBox.setCurrentIndex(3)
 
         
         self.DateLabel = QtWidgets.QLabel(Form)
@@ -111,9 +113,32 @@ class Ui_Form(object):
 
         self.label.setText((""))
 
+
+    def color_picker(self):
+        color = QColorDialog.getColor()
+        ColorGet = color.getRgb()
+        FinalColor = ColorGet[0:3]
+
+        TargetFile = open("json_files\Settings.json","r")
+        json_object = json.load(TargetFile)
+
+        json_object["BColor"] = FinalColor
+
+        TargetFile.close()
+
+        TargetFile = open("json_files\Settings.json",'w')
+        json.dump(json_object,TargetFile)
+        TargetFile.close()
+
+        self.label.setText(("Changes will be applied after the app has been restarted."))
+        self.label.adjustSize()
+
+
+        print(FinalColor)
+        
         
 
-    def UpdateSettings(self):
+    def UpdateSettings(self,FinalColor):
         print(self.ColorBox.currentText())
 
         BColor = self.ColorBox.currentText()
@@ -138,12 +163,9 @@ class Ui_Form(object):
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
 
-    
-    def color_picker(self):
-        color = QColorDialog.getColor()
-        FinalColor = color.getRgb()
-        print(FinalColor[0]) #need element 0-2 from tuple to get correct RGB value
 
+   
+        
         
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
@@ -153,6 +175,7 @@ class Ui_Form(object):
         self.ColorBox.setItemText(0, _translate("Form", "Dark"))
         self.ColorBox.setItemText(1, _translate("Form", "Light"))
         self.ColorBox.setItemText(2, _translate("Form", "Pink"))
+        self.ColorBox.setItemText(3, _translate("Form", "Custom"))
 
         self.DateLabel.setText(_translate("Form", "Date Format"))
         self.DateBox.setItemText(0, _translate("Form", "Day/Month/Year"))
