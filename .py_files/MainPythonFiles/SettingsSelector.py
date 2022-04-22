@@ -24,13 +24,16 @@ with open("json_files\Settings.json") as json_file:
         print("list found")
 
     elif(isinstance(data["BColor"],str)):
-        print("str found")
-        print(data["BColor"])
-        SelectedColor = "background-color:rgb({});".format(data["BColor"])
-        
-        
+        if data["BColor"] != 'Custom':
+            print("str found")
+            print(data["BColor"])
+            SelectedColor = "background-color:rgb({});".format(data["BColor"])
+        else:
+            SelectedColor = "background-color:rgb(71, 82, 99);"  
     else:
         SelectedColor = "background-color:rgb(71, 82, 99);"
+        
+        
     
      
 

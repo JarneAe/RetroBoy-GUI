@@ -26,17 +26,6 @@ class Ui_Form(object):
         self.ColorBox.addItem("")
         self.ColorBox.addItem("")
 
-    
-        if SelectedColor == "background-color:rgb(71, 82, 99);":
-            self.ColorBox.setCurrentIndex(0)
-        elif SelectedColor == "background-color:rgb(215, 227, 245);":
-            self.ColorBox.setCurrentIndex(1)
-        elif SelectedColor == "background-color:rgb(220,20,60);":
-            self.ColorBox.setCurrentIndex(2)
-        else:
-            self.ColorBox.setCurrentIndex(3)
-
-        
         self.DateLabel = QtWidgets.QLabel(Form)
         self.DateLabel.setGeometry(QtCore.QRect(230, 190, 61, 16))
         self.DateLabel.setObjectName("DateLabel")
@@ -46,15 +35,6 @@ class Ui_Form(object):
         self.DateBox.setObjectName("DateBox")
         self.DateBox.addItem("")
         self.DateBox.addItem("")
-
-        now = datetime.now()
-
-
-        if DateFormat == now.strftime("%d-%m-%y"):
-            self.DateBox.setCurrentIndex(0)
-        else:
-            self.DateBox.setCurrentIndex(1)
-
 
         self.HourLabel = QtWidgets.QLabel(Form)
         self.HourLabel.setGeometry(QtCore.QRect(230, 240, 61, 16))
@@ -66,12 +46,6 @@ class Ui_Form(object):
         self.HourBox.setObjectName("HourBox")
         self.HourBox.addItem("")
         self.HourBox.addItem("")
-
-        if TimeFormat == "%I:%M %p":
-            self.HourBox.setCurrentIndex(0)
-        else:
-            self.HourBox.setCurrentIndex(1)
-
 
         self.BackButton = QtWidgets.QPushButton(Form)
         self.BackButton.setGeometry(QtCore.QRect(10, 10, 41, 41))
@@ -114,9 +88,29 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-
-
         self.label.setText((""))
+    
+        now = datetime.now()
+
+        if DateFormat == now.strftime("%d-%m-%y"):
+            self.DateBox.setCurrentIndex(0)
+        else:
+            self.DateBox.setCurrentIndex(1)
+            
+        if TimeFormat == "%I:%M %p":
+            self.HourBox.setCurrentIndex(0)
+        else:
+            self.HourBox.setCurrentIndex(1)
+
+        if SelectedColor == "background-color:rgb(71, 82, 99);":
+            self.ColorBox.setCurrentIndex(0)
+        elif SelectedColor == "background-color:rgb(215, 227, 245);":
+            self.ColorBox.setCurrentIndex(1)
+        elif SelectedColor == "background-color:rgb(220,20,60);":
+            self.ColorBox.setCurrentIndex(2)
+        else:
+            self.ColorBox.setCurrentIndex(3)
+    
     
     def random_color(self):
         RGB = f'{random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)}'
@@ -135,18 +129,20 @@ class Ui_Form(object):
 
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
+        return FinalColor
 
-
-        print(FinalColor)
         
     def UpdateSettings(self):
-        
-        BColor = self.ColorBox.currentText()
+
+        if self.ColorBox.currentText() != 'Custom':
+            BColor = self.ColorBox.currentText()
+            PushBColor(BColor)
+            
         DateFormat = self.DateBox.currentText()
         TimeFormat = self.HourBox.currentText()
-         
+        
         PushTimeFormat(TimeFormat)
-        PushBColor(BColor)
+        
         PushDateFormat(DateFormat)
 
         self.label.setText(("Changes will be applied after the app has been restarted."))

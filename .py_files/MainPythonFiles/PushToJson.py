@@ -1,6 +1,5 @@
 import json
 
-
 def PushBColor(color):
     
     TargetFile = open("json_files\Settings.json","r")
@@ -12,6 +11,7 @@ def PushBColor(color):
     TargetFile = open("json_files\Settings.json",'w')
     json.dump(json_object,TargetFile)
     TargetFile.close()
+    return color
 
 def PushTimeFormat(TimeFormat):
     TargetFile = open("json_files\Settings.json","r")

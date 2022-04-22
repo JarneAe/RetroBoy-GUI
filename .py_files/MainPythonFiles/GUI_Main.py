@@ -130,12 +130,12 @@ class Ui_GUI(object):
         self.ButtonSettings.setObjectName("ButtonSettings")
 
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(10, 10, 111, 16))
+        self.label.setGeometry(QtCore.QRect(10, 10, 150, 25))
         self.label.setObjectName("label")
 
 
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(115, 12, 47, 13))
+        self.label_2.setGeometry(QtCore.QRect(135, 10, 47, 25))
         self.label_2.setObjectName("label_2")
         self.label_2.setText(SnakeScore)
 
@@ -187,7 +187,7 @@ class Ui_GUI(object):
     def retranslateUi(self, GUI):
         _translate = QtCore.QCoreApplication.translate
         GUI.setWindowTitle(_translate("GUI", "GUI"))
-        self.label.setText(_translate("MainWindow", "Recent Snake Score:"))
+        self.label.setText(_translate("MainWindow", "Last Session High-Score: "))
         self.label_2.setText(_translate("MainWindow", SnakeScore))
 
     def show_popup(self):
