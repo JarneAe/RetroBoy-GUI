@@ -6,15 +6,25 @@ from PyQt5.QtCore import QTimer,QDateTime
 from datetime import date, datetime
 import sys
 from PyQt5.QtWidgets import QApplication, QLabel
-from PyQt5.QtCore import Qt,QTimer
-from Main_Settings import *
+from PyQt5.QtCore import QTimer
+from Main_Settings import Ui_Form
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 from SnakeScoreGetter import SnakeScore
 
+
+
+
+
+
 class Ui_GUI(object):
+
+
+
+
 
     #link to the settings widget(other file)
     def openSettings(self):
+       
 
         self.window = QtWidgets.QWidget()
         self.ui = Ui_Form()
@@ -22,9 +32,13 @@ class Ui_GUI(object):
         self.window.show()
 
 
+
+
+
     def setupUi(self, GUI):
 
         #GUI frame setup
+        
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
         GUI.setAutoFillBackground(False)
@@ -132,6 +146,7 @@ class Ui_GUI(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 150, 25))
         self.label.setObjectName("label")
+        self.label.setFont(QtGui.QFont('Arial',8))
 
 
         self.label_2 = QtWidgets.QLabel(self.centralwidget)

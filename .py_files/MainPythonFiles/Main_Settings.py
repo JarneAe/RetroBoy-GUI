@@ -1,10 +1,15 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore,QtWidgets
 from PyQt5.QtWidgets import * 
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
-from datetime import date, datetime
+from datetime import datetime
 from PushToJson import PushBColor,PushTimeFormat,PushDateFormat
-import json
 import random
+from getbcolor import recognize_color,find_colors
+
+def FindColor():
+    result = find_colors()
+    colorname = recognize_color(result[0],result[1],result[2])
+    return colorname
 
 class Ui_Form(object):
 
@@ -80,10 +85,19 @@ class Ui_Form(object):
         self.RandomBColor.setGeometry(QtCore.QRect(470, 220, 75, 23))
         self.RandomBColor.setObjectName("RandomBColor")
 
+        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2.setGeometry(QtCore.QRect(220, 370, 101, 16))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(Form)
+        self.label_3.setGeometry(QtCore.QRect(340, 370, 181, 16))
+        self.label_3.setObjectName("label_3")
+
         self.BackButton.clicked.connect(lambda: Form.close())
         self.UpdateButton.clicked.connect(self.UpdateSettings)
         self.pushButton_2.clicked.connect(self.color_picker)
         self.RandomBColor.clicked.connect(self.random_color)
+
+
         
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -117,6 +131,8 @@ class Ui_Form(object):
         PushBColor(RGB)
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
+        print(recognize_color(find_colors()[0],find_colors()[1],find_colors()[2]))
+        
         
 
 
@@ -141,8 +157,7 @@ class Ui_Form(object):
         DateFormat = self.DateBox.currentText()
         TimeFormat = self.HourBox.currentText()
         
-        PushTimeFormat(TimeFormat)
-        
+        PushTimeFormat(TimeFormat)       
         PushDateFormat(DateFormat)
 
         self.label.setText(("Changes will be applied after the app has been restarted."))
@@ -176,6 +191,10 @@ class Ui_Form(object):
         self.pushButton_2.setText(_translate("Form15", "Press Here For Custom Color"))
 
         self.RandomBColor.setText(_translate("Form16", "Surprise me!"))
+
+        self.label_2.setText(_translate("Form", "The selected color is: "))
+        self.label_3.setText(_translate("Form", recognize_color(find_colors()[0],find_colors()[1],find_colors()[2])))
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 import json
 from datetime import date, datetime
 
+
 #Reads json file and loads it to something readable
 with open("json_files\Settings.json") as json_file:
     data = json.load(json_file)
@@ -33,10 +34,6 @@ with open("json_files\Settings.json") as json_file:
     else:
         SelectedColor = "background-color:rgb(71, 82, 99);"
         
-        
-    
-     
-
 
 #checks the date in the json file 
     now = datetime.now()
