@@ -7,7 +7,6 @@ import random
 from getbcolor import recognize_color,find_colors
 
 
-
 class Ui_Form(object):
 
     def setupUi(self, Form):
@@ -160,8 +159,6 @@ class Ui_Form(object):
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
 
-
-   
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -191,8 +188,6 @@ class Ui_Form(object):
 
         self.label_2.setText(_translate("Form", "The selected color is: "))
         self.label_3.setText(_translate("Form", recognize_color(find_colors()[0],find_colors()[1],find_colors()[2])))
-
-
 
 if __name__ == "__main__":
     import sys
