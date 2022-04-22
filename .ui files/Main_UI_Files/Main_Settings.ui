@@ -154,7 +154,7 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>270</x>
      <y>460</y>
      <width>111</width>
      <height>23</height>
@@ -188,6 +188,19 @@
    </property>
    <property name="text">
     <string>Press Here For Custom Color</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="RandomBColor">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>220</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Surprise me!</string>
    </property>
   </widget>
  </widget>

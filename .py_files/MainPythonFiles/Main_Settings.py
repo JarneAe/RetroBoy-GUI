@@ -2,7 +2,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import * 
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 from datetime import date, datetime
+from PushToJson import PushBColor,PushTimeFormat,PushDateFormat
 import json
+import random
 
 class Ui_Form(object):
 
@@ -99,19 +101,29 @@ class Ui_Form(object):
         self.pushButton_2 = QtWidgets.QPushButton(Form)
         self.pushButton_2.setGeometry(QtCore.QRect(430, 190, 171, 23))
         self.pushButton_2.setObjectName("pushButton_2")
+        
+        self.RandomBColor = QtWidgets.QPushButton(Form)
+        self.RandomBColor.setGeometry(QtCore.QRect(470, 220, 75, 23))
+        self.RandomBColor.setObjectName("RandomBColor")
 
         self.BackButton.clicked.connect(lambda: Form.close())
         self.UpdateButton.clicked.connect(self.UpdateSettings)
         self.pushButton_2.clicked.connect(self.color_picker)
-
-
-
+        self.RandomBColor.clicked.connect(self.random_color)
+        
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
 
 
         self.label.setText((""))
+    
+    def random_color(self):
+        RGB = f'{random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)}'
+        PushBColor(RGB)
+        self.label.setText(("Changes will be applied after the app has been restarted."))
+        self.label.adjustSize()
+        
 
 
     def color_picker(self):
@@ -119,16 +131,7 @@ class Ui_Form(object):
         ColorGet = color.getRgb()
         FinalColor = ColorGet[0:3]
 
-        TargetFile = open("json_files\Settings.json","r")
-        json_object = json.load(TargetFile)
-
-        json_object["BColor"] = FinalColor
-
-        TargetFile.close()
-
-        TargetFile = open("json_files\Settings.json",'w')
-        json.dump(json_object,TargetFile)
-        TargetFile.close()
+        PushBColor(FinalColor)
 
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
@@ -136,61 +139,47 @@ class Ui_Form(object):
 
         print(FinalColor)
         
+    def UpdateSettings(self):
         
-
-    def UpdateSettings(self,FinalColor):
-        print(self.ColorBox.currentText())
-
         BColor = self.ColorBox.currentText()
-
         DateFormat = self.DateBox.currentText()
-
         TimeFormat = self.HourBox.currentText()
+         
+        PushTimeFormat(TimeFormat)
+        PushBColor(BColor)
+        PushDateFormat(DateFormat)
 
-        TargetFile = open("json_files\Settings.json","r")
-        json_object = json.load(TargetFile)
-        
-        json_object["BColor"] = BColor
-        json_object["Date"] = DateFormat
-        json_object["Time"] = TimeFormat
-        
-        TargetFile.close()
-        print(json_object)
-
-        TargetFile = open("json_files\Settings.json",'w')
-        json.dump(json_object,TargetFile)
-        TargetFile.close()
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
 
 
    
-        
-        
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
 
-        self.ColorLabel.setText(_translate("Form", "Color mode"))
-        self.ColorBox.setItemText(0, _translate("Form", "Dark"))
-        self.ColorBox.setItemText(1, _translate("Form", "Light"))
-        self.ColorBox.setItemText(2, _translate("Form", "Pink"))
-        self.ColorBox.setItemText(3, _translate("Form", "Custom"))
+        self.ColorLabel.setText(_translate("Form1", "Color mode"))
+        self.ColorBox.setItemText(0, _translate("Form2", "Dark"))
+        self.ColorBox.setItemText(1, _translate("Form3", "Light"))
+        self.ColorBox.setItemText(2, _translate("Form4", "Pink"))
+        self.ColorBox.setItemText(3, _translate("Form5", "Custom"))
 
-        self.DateLabel.setText(_translate("Form", "Date Format"))
-        self.DateBox.setItemText(0, _translate("Form", "Day/Month/Year"))
-        self.DateBox.setItemText(1, _translate("Form", "Month/Day/Year"))
+        self.DateLabel.setText(_translate("Form6", "Date Format"))
+        self.DateBox.setItemText(0, _translate("Form7", "Day/Month/Year"))
+        self.DateBox.setItemText(1, _translate("Form8", "Month/Day/Year"))
 
-        self.HourLabel.setText(_translate("Form", "Hour Format"))
-        self.HourBox.setItemText(0, _translate("Form", "AM/PM"))
-        self.HourBox.setItemText(1, _translate("Form", "24 Hours"))
+        self.HourLabel.setText(_translate("Form9", "Hour Format"))
+        self.HourBox.setItemText(0, _translate("Form10", "AM/PM"))
+        self.HourBox.setItemText(1, _translate("Form11", "24 Hours"))
 
-        self.UpdateButton.setText(_translate("Form", "Update Settings"))
+        self.UpdateButton.setText(_translate("Form12", "Update Settings"))
 
-        self.label.setText(_translate("Form", ""))
+        self.label.setText(_translate("Form13", ""))
 
-        self.label.setText(_translate("Form", "TextLabel"))
-        self.pushButton_2.setText(_translate("Form", "Press Here For Custom Color"))
+        self.label.setText(_translate("Form14", "TextLabel"))
+        self.pushButton_2.setText(_translate("Form15", "Press Here For Custom Color"))
+
+        self.RandomBColor.setText(_translate("Form16", "Surprise me!"))
 
 
 if __name__ == "__main__":
