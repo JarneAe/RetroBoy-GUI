@@ -1,6 +1,8 @@
-import numpy as np
 import pandas as pd
 import PIL.ImageGrab
+
+index=["color", "color_name", "hex", "R", "G", "B"]
+csv = pd.read_csv('F:\RetroBoy-GUI\Images\colors.csv', names=index, header=None)
 
 def find_colors():
     rgb = PIL.ImageGrab.grab().load()[1069,749]
@@ -9,14 +11,10 @@ def find_colors():
     rgb_str = delimiter.join([str(value) for value in rgb])
 
     rgbsplit = rgb_str.split(',')
-    print(rgbsplit[0])
     R = int(rgbsplit[0])
     G = int(rgbsplit[1])
     B = int(rgbsplit[2])
     return R,G,B
-
-index=["color", "color_name", "hex", "R", "G", "B"]
-csv = pd.read_csv('F:\RetroBoy-GUI\Images\colors.csv', names=index, header=None)
 
 def recognize_color(R,G,B):
     minimum = 10000

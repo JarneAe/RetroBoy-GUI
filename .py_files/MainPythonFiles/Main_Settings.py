@@ -6,10 +6,7 @@ from PushToJson import PushBColor,PushTimeFormat,PushDateFormat
 import random
 from getbcolor import recognize_color,find_colors
 
-def FindColor():
-    result = find_colors()
-    colorname = recognize_color(result[0],result[1],result[2])
-    return colorname
+
 
 class Ui_Form(object):
 
