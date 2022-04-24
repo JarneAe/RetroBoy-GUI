@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import webbrowser
 from PyQt5.QtWidgets import QMessageBox,QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
-from PyQt5.QtCore import QTimer,QDateTime
+from PyQt5.QtCore import QTimer,QDateTime,QCoreApplication
 from datetime import date, datetime
 import sys
 from PyQt5.QtWidgets import QApplication, QLabel
@@ -13,14 +13,11 @@ from SnakeScoreGetter import SnakeScore
 
 
 
+#Add a way to restart the GUI with 1 click 
 
 
 
-class Ui_GUI(object):
-
-
-
-
+class Ui_Main_Interface(object):
 
     #link to the settings widget(other file)
     def openSettings(self):
@@ -31,14 +28,9 @@ class Ui_GUI(object):
         self.ui.setupUi(self.window)
         self.window.show()
 
-
-
-
-
     def setupUi(self, GUI):
 
         #GUI frame setup
-        
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
         GUI.setAutoFillBackground(False)
@@ -143,6 +135,13 @@ class Ui_GUI(object):
         self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
         self.ButtonSettings.setObjectName("ButtonSettings")
 
+        self.ButtonReload = QtWidgets.QPushButton(self.centralwidget)
+        self.ButtonReload.setGeometry(QtCore.QRect(10, 480, 51, 41))
+        self.ButtonReload.setText("")
+        self.ButtonReload.setIcon(icon6)
+        self.ButtonReload.setIconSize(QtCore.QSize(36, 180))
+        self.ButtonReload.setObjectName("ButtonReload")
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 150, 25))
         self.label.setObjectName("label")
@@ -163,6 +162,7 @@ class Ui_GUI(object):
         self.ButtonYT.clicked.connect(self.OpenYoutube)
         self.ButtonExit.clicked.connect(self.show_popup)
         self.ButtonSettings.clicked.connect(self.openSettings)
+        self.ButtonReload.clicked.connect(self.ReloadProgram)
         
         #assigning widget
         GUI.setCentralWidget(self.centralwidget)
@@ -171,6 +171,12 @@ class Ui_GUI(object):
         QtCore.QMetaObject.connectSlotsByName(GUI)
 
         return SelectedColor
+    
+    def ReloadProgram(self):
+        print("Before reload")
+        GUI.close()
+        os.system('python ".py_files\MainPythonFiles\GUI_Launch.py"')
+
 
     def clock(self):
         while True:
@@ -227,12 +233,12 @@ class Ui_GUI(object):
             pass
     
     
-
+#can be removed (needed for testing right now)
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     GUI = QtWidgets.QMainWindow()
-    ui = Ui_GUI()
+    ui = Ui_Main_Interface()
     ui.setupUi(GUI)
     GUI.show()
     sys.exit(app.exec_())
