@@ -2,9 +2,9 @@ from tkinter.tix import Select
 from PyQt5 import QtCore,QtWidgets,QtGui
 from PyQt5.QtWidgets import *
 from cv2 import Formatter_FMT_C 
-from SettingsSelector import SelectedColor,DateFormat,TimeFormat
+from SettingsSelector import SelectedColor,DateFormat,TimeFormat,SelectedButtonColor
 from datetime import datetime
-from PushToJson import PushBColor,PushTimeFormat,PushDateFormat
+from PushToJson import PushBColor,PushTimeFormat,PushDateFormat,PushButtonColor
 import random
 from getbcolor import recognize_color
 import re 
@@ -57,7 +57,7 @@ class Ui_Form(object):
         self.BackButton.setIconSize(QtCore.QSize(36, 180))
         self.BackButton.setText("")
         self.BackButton.setObjectName("BackButton")
-        self.BackButton.setStyleSheet("background-color: white")
+        self.BackButton.setStyleSheet(SelectedButtonColor)
 
         self.line = QtWidgets.QFrame(Form)
         self.line.setGeometry(QtCore.QRect(220, 170, 201, 16))
@@ -79,26 +79,31 @@ class Ui_Form(object):
         self.label.setGeometry(QtCore.QRect(180, 50, 47, 13))
         self.label.setObjectName("label")
 
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(430, 190, 171, 23))
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.pickerButton = QtWidgets.QPushButton(Form)
+        self.pickerButton.setGeometry(QtCore.QRect(440, 140, 171, 23))
+        self.pickerButton.setObjectName("pickerButton")
         
         self.RandomBColor = QtWidgets.QPushButton(Form)
-        self.RandomBColor.setGeometry(QtCore.QRect(470, 220, 75, 23))
+        self.RandomBColor.setGeometry(QtCore.QRect(480, 170, 75, 23))
         self.RandomBColor.setObjectName("RandomBColor")
 
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setGeometry(QtCore.QRect(220, 370, 101, 16))
-        self.label_2.setStyleSheet("QLabel {color: black;}")
-        self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(Form)
-        self.label_3.setGeometry(QtCore.QRect(340, 370, 181, 16))
-        self.label_3.setObjectName("label_3")
+        self.ButtonColor = QtWidgets.QPushButton(Form)
+        self.ButtonColor.setGeometry(QtCore.QRect(230, 320, 171, 23))
+        self.ButtonColor.setObjectName("ButtonColor")
+
+        self.colorshow1 = QtWidgets.QLabel(Form)
+        self.colorshow1.setGeometry(QtCore.QRect(230, 440, 101, 16))
+        self.colorshow1.setStyleSheet("QLabel {color: black;}")
+        self.colorshow1.setObjectName("colorshow1")
+        self.colorshow2 = QtWidgets.QLabel(Form)
+        self.colorshow2.setGeometry(QtCore.QRect(350, 440, 181, 16))
+        self.colorshow2.setObjectName("colorshow2")
 
         self.BackButton.clicked.connect(lambda: Form.close())
         self.UpdateButton.clicked.connect(self.UpdateSettings)
-        self.pushButton_2.clicked.connect(self.color_picker)
-        self.RandomBColor.clicked.connect(self.random_color)
+        self.pickerButton.clicked.connect(self.Color_Picker)
+        self.RandomBColor.clicked.connect(self.Random_Color)
+        self.ButtonColor.clicked.connect(self.Color_Picker_Button)
 
 
         
@@ -128,17 +133,28 @@ class Ui_Form(object):
         else:
             self.ColorBox.setCurrentIndex(3)
     
-    
-    def random_color(self):
+    def Color_Picker_Button(self):
+        color = QColorDialog.getColor()
+        ColorGet = color.getRgb()
+        FinalColor = ColorGet[0:3]
+
+        PushButtonColor(FinalColor)
+
+        self.label.setText(("Changes will be applied after the app has been restarted."))
+        self.label.adjustSize()
+        return FinalColor
+
+
+
+
+    def Random_Color(self):
         RGB = f'{random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)}'
         PushBColor(RGB)
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
 
         
-    
-
-    def color_picker(self):
+    def Color_Picker(self):
         color = QColorDialog.getColor()
         ColorGet = color.getRgb()
         FinalColor = ColorGet[0:3]
@@ -188,13 +204,14 @@ class Ui_Form(object):
         self.label.setText(_translate("Form13", ""))
 
         self.label.setText(_translate("Form14", "TextLabel"))
-        self.pushButton_2.setText(_translate("Form15", "Press Here For Custom Color"))
+        self.pickerButton.setText(_translate("Form15", "Press Here For Custom Color"))
 
         self.RandomBColor.setText(_translate("Form16", "Surprise me!"))
 
+        self.ButtonColor.setText(_translate("form17","Click here for custom button color"))
         s = [float(s) for s in re.findall(r'-?\d+\.?\d*', SelectedColor)]
-        self.label_2.setText(_translate("Form", "The selected color is: "))
-        self.label_3.setText(_translate("Form", recognize_color(int(s[0]),int(s[1]),int(s[2]))))
+        self.colorshow1.setText(_translate("Form", "The selected color is: "))
+        self.colorshow2.setText(_translate("Form", recognize_color(int(s[0]),int(s[1]),int(s[2]))))
         
 if __name__ == "__main__":
     import sys

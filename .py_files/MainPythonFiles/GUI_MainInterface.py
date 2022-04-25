@@ -9,12 +9,8 @@ import sys
 from PyQt5.QtWidgets import QApplication, QLabel
 from PyQt5.QtCore import QTimer
 from Main_Settings import Ui_Form
-from SettingsSelector import SelectedColor,DateFormat,TimeFormat
+from SettingsSelector import SelectedColor,DateFormat,TimeFormat,SelectedButtonColor
 from SnakeScoreGetter import SnakeScore
-import re
-
-
-#Add a way to restart the GUI with 1 click 
 
 
 
@@ -109,7 +105,7 @@ class Ui_Main_Interface(object):
         self.ButtonExit.setIcon(icon6)
         self.ButtonExit.setIconSize(QtCore.QSize(36, 180))
         self.ButtonExit.setObjectName("ButtonExit")
-        self.ButtonExit.setStyleSheet("background-color: white")
+        self.ButtonExit.setStyleSheet(SelectedButtonColor)
 
         #Time display
         self.Time = QtWidgets.QLabel(self.centralwidget)
@@ -140,7 +136,7 @@ class Ui_Main_Interface(object):
         self.ButtonSettings.setIcon(icon7)
         self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
         self.ButtonSettings.setObjectName("ButtonSettings")
-        self.ButtonSettings.setStyleSheet("background-color: white")
+        self.ButtonSettings.setStyleSheet(SelectedButtonColor)
 
         self.ButtonReload = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonReload.setGeometry(QtCore.QRect(10, 480, 51, 41))
@@ -150,7 +146,7 @@ class Ui_Main_Interface(object):
         self.ButtonReload.setIcon(icon8)
         self.ButtonReload.setIconSize(QtCore.QSize(36, 180))
         self.ButtonReload.setObjectName("ButtonReload")
-        self.ButtonReload.setStyleSheet("background-color: white")
+        self.ButtonReload.setStyleSheet(SelectedButtonColor)
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 150, 25))
