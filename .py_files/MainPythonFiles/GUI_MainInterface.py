@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import webbrowser
+import PyQt5
 from PyQt5.QtWidgets import QMessageBox,QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
 from PyQt5.QtCore import QTimer,QDateTime,QCoreApplication
 from datetime import date, datetime
@@ -10,7 +11,6 @@ from PyQt5.QtCore import QTimer
 from Main_Settings import Ui_Form
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 from SnakeScoreGetter import SnakeScore
-
 
 
 #Add a way to restart the GUI with 1 click 
@@ -29,7 +29,8 @@ class Ui_Main_Interface(object):
         self.window.show()
 
     def setupUi(self, GUI):
-
+        global GUIRef
+        GUIRef = GUI 
         #GUI frame setup
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)
@@ -134,13 +135,17 @@ class Ui_Main_Interface(object):
         self.ButtonSettings.setIcon(icon7)
         self.ButtonSettings.setIconSize(QtCore.QSize(36, 180))
         self.ButtonSettings.setObjectName("ButtonSettings")
+        self.ButtonSettings.setStyleSheet("background-color: white")
 
         self.ButtonReload = QtWidgets.QPushButton(self.centralwidget)
         self.ButtonReload.setGeometry(QtCore.QRect(10, 480, 51, 41))
         self.ButtonReload.setText("")
-        self.ButtonReload.setIcon(icon6)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap("Images\\ReloadIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ButtonReload.setIcon(icon8)
         self.ButtonReload.setIconSize(QtCore.QSize(36, 180))
         self.ButtonReload.setObjectName("ButtonReload")
+        self.ButtonReload.setStyleSheet("background-color: white")
 
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 150, 25))
@@ -174,7 +179,7 @@ class Ui_Main_Interface(object):
     
     def ReloadProgram(self):
         print("Before reload")
-        GUI.close()
+        GUIRef.close()
         os.system('python ".py_files\MainPythonFiles\GUI_Launch.py"')
 
 

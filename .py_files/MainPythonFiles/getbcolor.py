@@ -2,7 +2,7 @@ import pandas as pd
 import PIL.ImageGrab
 
 index=["color", "color_name", "hex", "R", "G", "B"]
-csv = pd.read_csv('F:\RetroBoy-GUI\Images\colors.csv', names=index, header=None)
+csv = pd.read_csv('Images\colors.csv', names=index, header=None)
 
 def find_colors():
     rgb = PIL.ImageGrab.grab().load()[1069,749]
