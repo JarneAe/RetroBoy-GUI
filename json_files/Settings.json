@@ -1,1 +1,1 @@
-{"BColor": [61, 255, 181], "ButtonColor": [33, 163, 26], "Date": "Day/Month/Year", "Time": "AM/PM"}
+{"BColor": "Dark", "ButtonColor": "background-color:rgb(0,254,254);", "Date": "Day/Month/Year", "Time": "24 Hours"}

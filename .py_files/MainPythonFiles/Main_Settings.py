@@ -99,11 +99,16 @@ class Ui_Form(object):
         self.colorshow2.setGeometry(QtCore.QRect(350, 440, 181, 16))
         self.colorshow2.setObjectName("colorshow2")
 
+        self.ResetDefault = QtWidgets.QPushButton(Form)
+        self.ResetDefault.setGeometry(QtCore.QRect(544, 460, 101, 23))
+        self.ResetDefault.setObjectName("ResetDefault")
+
         self.BackButton.clicked.connect(lambda: Form.close())
         self.UpdateButton.clicked.connect(self.UpdateSettings)
         self.pickerButton.clicked.connect(self.Color_Picker)
         self.RandomBColor.clicked.connect(self.Random_Color)
         self.ButtonColor.clicked.connect(self.Color_Picker_Button)
+        self.ResetDefault.clicked.connect(self.Reset_Default)
 
 
         
@@ -133,6 +138,15 @@ class Ui_Form(object):
         else:
             self.ColorBox.setCurrentIndex(3)
     
+    def Reset_Default(self):
+        PushBColor("Dark")
+        PushButtonColor("background-color:rgb(0,254,254);")
+        PushTimeFormat("24 Hours")
+        PushDateFormat("Day/Month/Year")
+        self.label.setText(("Changes will be applied after the app has been restarted."))
+        self.label.adjustSize()
+
+
     def Color_Picker_Button(self):
         color = QColorDialog.getColor()
         ColorGet = color.getRgb()
@@ -200,14 +214,11 @@ class Ui_Form(object):
         self.HourBox.setItemText(1, _translate("Form11", "24 Hours"))
 
         self.UpdateButton.setText(_translate("Form12", "Update Settings"))
-
         self.label.setText(_translate("Form13", ""))
-
         self.label.setText(_translate("Form14", "TextLabel"))
         self.pickerButton.setText(_translate("Form15", "Press Here For Custom Color"))
-
         self.RandomBColor.setText(_translate("Form16", "Surprise me!"))
-
+        self.ResetDefault.setText(_translate("Form", "Reset To Default"))
         self.ButtonColor.setText(_translate("form17","Click here for custom button color"))
         s = [float(s) for s in re.findall(r'-?\d+\.?\d*', SelectedColor)]
         self.colorshow1.setText(_translate("Form", "The selected color is: "))
