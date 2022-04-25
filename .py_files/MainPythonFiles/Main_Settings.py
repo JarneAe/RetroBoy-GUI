@@ -140,7 +140,7 @@ class Ui_Form(object):
     
     def Reset_Default(self):
         PushBColor("Dark")
-        PushButtonColor("background-color:rgb(0,254,254);")
+        PushButtonColor("Default")
         PushTimeFormat("24 Hours")
         PushDateFormat("Day/Month/Year")
         self.label.setText(("Changes will be applied after the app has been restarted."))

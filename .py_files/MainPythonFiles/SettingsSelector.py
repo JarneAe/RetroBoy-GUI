@@ -35,9 +35,11 @@ with open("json_files\Settings.json") as json_file:
         SelectedColor = "background-color:rgb(71, 82, 99);"
 
 
+    if (data["ButtonColor"] == 'Default'):
+        SelectedButtonColor = "background-color:rgb(255, 255, 255);"
+        print("default color found")
 
-    
-    if(isinstance(data["ButtonColor"],list)):
+    elif(isinstance(data["ButtonColor"],list)):
         print(data["ButtonColor"])
         colors = data["ButtonColor"]
         SelectedButtonColor = "background-color:rgb({0},{1},{2})".format(colors[0],colors[1],colors[2])
