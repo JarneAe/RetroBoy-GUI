@@ -1,3 +1,4 @@
+from tkinter.tix import Select
 from PyQt5 import QtCore,QtWidgets,QtGui
 from PyQt5.QtWidgets import *
 from cv2 import Formatter_FMT_C 
@@ -5,8 +6,8 @@ from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 from datetime import datetime
 from PushToJson import PushBColor,PushTimeFormat,PushDateFormat
 import random
-from getbcolor import recognize_color,find_colors
-
+from getbcolor import recognize_color
+import re 
 
 class Ui_Form(object):
 
@@ -88,7 +89,7 @@ class Ui_Form(object):
 
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(220, 370, 101, 16))
-        self.label_2.setStyleSheet("QLabel {color: white;}")
+        self.label_2.setStyleSheet("QLabel {color: black;}")
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Form)
         self.label_3.setGeometry(QtCore.QRect(340, 370, 181, 16))
@@ -133,10 +134,9 @@ class Ui_Form(object):
         PushBColor(RGB)
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
-        print(recognize_color(find_colors()[0],find_colors()[1],find_colors()[2]))
-        
-        
 
+        
+    
 
     def color_picker(self):
         color = QColorDialog.getColor()
@@ -192,9 +192,10 @@ class Ui_Form(object):
 
         self.RandomBColor.setText(_translate("Form16", "Surprise me!"))
 
+        s = [float(s) for s in re.findall(r'-?\d+\.?\d*', SelectedColor)]
         self.label_2.setText(_translate("Form", "The selected color is: "))
-        self.label_3.setText(_translate("Form", recognize_color(find_colors()[0],find_colors()[1],find_colors()[2])))
-
+        self.label_3.setText(_translate("Form", recognize_color(int(s[0]),int(s[1]),int(s[2]))))
+        
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

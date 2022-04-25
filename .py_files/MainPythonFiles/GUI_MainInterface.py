@@ -11,6 +11,7 @@ from PyQt5.QtCore import QTimer
 from Main_Settings import Ui_Form
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 from SnakeScoreGetter import SnakeScore
+import re
 
 
 #Add a way to restart the GUI with 1 click 
@@ -29,8 +30,12 @@ class Ui_Main_Interface(object):
         self.window.show()
 
     def setupUi(self, GUI):
+        print(f"The BColor is {SelectedColor}")
+        print(f"The type is: {SelectedColor[21:23]}")
         global GUIRef
         GUIRef = GUI 
+
+
         #GUI frame setup
         GUI.setObjectName("GUI")
         GUI.resize(773, 567)

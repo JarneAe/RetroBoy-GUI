@@ -1,22 +1,8 @@
 import pandas as pd
-import PIL.ImageGrab
 
 index=["color", "color_name", "hex", "R", "G", "B"]
 csv = pd.read_csv('Images\colors.csv', names=index, header=None)
 
-
-#Do this exactly from the json file so you get 100% accuracy
-def find_colors():
-    rgb = PIL.ImageGrab.grab().load()[1069,749]
-
-    delimiter = ','
-    rgb_str = delimiter.join([str(value) for value in rgb])
-
-    rgbsplit = rgb_str.split(',')
-    R = int(rgbsplit[0])
-    G = int(rgbsplit[1])
-    B = int(rgbsplit[2])
-    return R,G,B
 
 def recognize_color(R,G,B):
     minimum = 10000
