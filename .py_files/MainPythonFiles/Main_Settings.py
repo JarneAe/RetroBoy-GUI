@@ -1,5 +1,6 @@
-from PyQt5 import QtCore,QtWidgets
-from PyQt5.QtWidgets import * 
+from PyQt5 import QtCore,QtWidgets,QtGui
+from PyQt5.QtWidgets import *
+from cv2 import Formatter_FMT_C 
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat
 from datetime import datetime
 from PushToJson import PushBColor,PushTimeFormat,PushDateFormat
@@ -10,7 +11,6 @@ from getbcolor import recognize_color,find_colors
 class Ui_Form(object):
 
     def setupUi(self, Form):
-        
         Form.setStyleSheet(SelectedColor)
         Form.setObjectName("Form")
         Form.resize(661, 500)
@@ -50,8 +50,13 @@ class Ui_Form(object):
 
         self.BackButton = QtWidgets.QPushButton(Form)
         self.BackButton.setGeometry(QtCore.QRect(10, 10, 41, 41))
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("Images\BackArrow.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.BackButton.setIcon(icon1)
+        self.BackButton.setIconSize(QtCore.QSize(36, 180))
         self.BackButton.setText("")
         self.BackButton.setObjectName("BackButton")
+        self.BackButton.setStyleSheet("background-color: white")
 
         self.line = QtWidgets.QFrame(Form)
         self.line.setGeometry(QtCore.QRect(220, 170, 201, 16))
