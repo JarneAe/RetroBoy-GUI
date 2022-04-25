@@ -88,6 +88,7 @@ class Ui_Form(object):
 
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(220, 370, 101, 16))
+        self.label_2.setStyleSheet("QLabel {color: white;}")
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Form)
         self.label_3.setGeometry(QtCore.QRect(340, 370, 181, 16))
