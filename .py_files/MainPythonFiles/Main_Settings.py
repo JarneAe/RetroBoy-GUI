@@ -9,7 +9,7 @@ import random
 from getbcolor import recognize_color
 import re 
 
-class Ui_Form(object):
+class Ui_Settings(object):
 
     def setupUi(self, Form):
         Form.setStyleSheet(SelectedColor)
@@ -220,15 +220,15 @@ class Ui_Form(object):
         self.RandomBColor.setText(_translate("Form16", "Surprise me!"))
         self.ResetDefault.setText(_translate("Form", "Reset To Default"))
         self.ButtonColor.setText(_translate("form17","Click here for custom button color"))
-        s = [float(s) for s in re.findall(r'-?\d+\.?\d*', SelectedColor)]
+        regexednumbers = [float(s) for s in re.findall(r'-?\d+\.?\d*', SelectedColor)]
         self.colorshow1.setText(_translate("Form", "The selected color is: "))
-        self.colorshow2.setText(_translate("Form", recognize_color(int(s[0]),int(s[1]),int(s[2]))))
+        self.colorshow2.setText(_translate("Form", recognize_color(int(regexednumbers[0]),int(regexednumbers[1]),int(regexednumbers[2]))))
         
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_Settings()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

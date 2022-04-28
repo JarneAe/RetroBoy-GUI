@@ -1,14 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import webbrowser
-import PyQt5
-from PyQt5.QtWidgets import QMessageBox,QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
-from PyQt5.QtCore import QTimer,QDateTime,QCoreApplication
-from datetime import date, datetime
-import sys
-from PyQt5.QtWidgets import QApplication, QLabel
+from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtCore import QTimer
-from Main_Settings import Ui_Form
+from datetime import datetime
+import sys
+from PyQt5.QtCore import QTimer
+from Main_Settings import Ui_Settings
+from ToolBox import Ui_ToolBox
 from SettingsSelector import SelectedColor,DateFormat,TimeFormat,SelectedButtonColor
 from SnakeScoreGetter import SnakeScore
 
@@ -19,15 +18,19 @@ class Ui_Main_Interface(object):
     #link to the settings widget(other file)
     def openSettings(self):
        
-
         self.window = QtWidgets.QWidget()
-        self.ui = Ui_Form()
+        self.ui = Ui_Settings()
+        self.ui.setupUi(self.window)
+        self.window.show()
+    
+    def OpenToolbox(self):
+        self.window = QtWidgets.QWidget()
+        self.ui = Ui_ToolBox()
         self.ui.setupUi(self.window)
         self.window.show()
 
+
     def setupUi(self, GUI):
-        print(f"The BColor is {SelectedColor}")
-        print(f"The type is: {SelectedColor[21:23]}")
         global GUIRef
         GUIRef = GUI 
 
@@ -159,6 +162,16 @@ class Ui_Main_Interface(object):
         self.label_2.setObjectName("label_2")
         self.label_2.setText(SnakeScore)
 
+        self.GameToolbox = QtWidgets.QPushButton(self.centralwidget)
+        self.GameToolbox.setGeometry(QtCore.QRect(70, 480, 51, 41))
+        self.GameToolbox.setText("")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("Images\\ToolBox.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.GameToolbox.setIcon(icon9)
+        self.GameToolbox.setIconSize(QtCore.QSize(36, 180))
+        self.GameToolbox.setStyleSheet(SelectedButtonColor)
+        self.GameToolbox.setObjectName("GameToolbox")
+
         #connection setup
         self.ButtonRetro.clicked.connect(self.OpenRetro)
         self.ButtonRasp.clicked.connect(self.GoToDesktop)
@@ -169,6 +182,7 @@ class Ui_Main_Interface(object):
         self.ButtonExit.clicked.connect(self.show_popup)
         self.ButtonSettings.clicked.connect(self.openSettings)
         self.ButtonReload.clicked.connect(self.ReloadProgram)
+        self.GameToolbox.clicked.connect(self.OpenToolbox)
         
         #assigning widget
         GUI.setCentralWidget(self.centralwidget)
@@ -179,7 +193,6 @@ class Ui_Main_Interface(object):
         return SelectedColor
     
     def ReloadProgram(self):
-        print("Before reload")
         GUIRef.close()
         os.system('python ".py_files\MainPythonFiles\GUI_Launch.py"')
 
@@ -196,9 +209,6 @@ class Ui_Main_Interface(object):
     def OpenFire(self):
         os.startfile("C:\\Program Files\\Mozilla Firefox\\firefox.exe")
 
-    def GoToDesktop(self):
-        pass
-
     def OpenNetflix(self):
         webbrowser.open('https://Netflix.com')
 
@@ -210,6 +220,9 @@ class Ui_Main_Interface(object):
 
     def ShutdownDevice(self):
         os.system("shutdown /s /t 1")
+
+    def GoToDesktop(self):
+        pass
 
     def retranslateUi(self, GUI):
         _translate = QtCore.QCoreApplication.translate
