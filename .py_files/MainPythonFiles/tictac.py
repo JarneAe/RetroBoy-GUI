@@ -196,7 +196,5 @@ class Tic_Tac_Toe():
             self.play_again()
             self.reset_board = False
 
-if __name__ == "__main__":
-    game_instance = Tic_Tac_Toe()
-    game_instance.mainloop()
+
 

@@ -132,7 +132,7 @@ class Ui_Main_Interface(object):
 
         #Button settings
         self.ButtonSettings = QtWidgets.QPushButton(self.centralwidget)
-        self.ButtonSettings.setGeometry(QtCore.QRect(630, 480, 51, 41))
+        self.ButtonSettings.setGeometry(QtCore.QRect(640, 480, 51, 41))
         self.ButtonSettings.setText("")
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap("Images\\SettingsIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -154,13 +154,8 @@ class Ui_Main_Interface(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 150, 25))
         self.label.setObjectName("label")
-        self.label.setFont(QtGui.QFont('Arial',8))
-
-
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(135, 10, 47, 25))
-        self.label_2.setObjectName("label_2")
-        self.label_2.setText(SnakeScore)
+        self.label.setFont(QtGui.QFont('Arial',12))
+        self.label.adjustSize()
 
         self.GameToolbox = QtWidgets.QPushButton(self.centralwidget)
         self.GameToolbox.setGeometry(QtCore.QRect(70, 480, 51, 41))
@@ -227,8 +222,8 @@ class Ui_Main_Interface(object):
     def retranslateUi(self, GUI):
         _translate = QtCore.QCoreApplication.translate
         GUI.setWindowTitle(_translate("GUI", "GUI"))
-        self.label.setText(_translate("MainWindow", "Last Session High-Score: "))
-        self.label_2.setText(_translate("MainWindow", SnakeScore))
+        self.label.setText(_translate("MainWindow", f"Last Session High-Score: {SnakeScore} "))
+        self.label.adjustSize()
 
     def show_popup(self):
         msg = QMessageBox()
