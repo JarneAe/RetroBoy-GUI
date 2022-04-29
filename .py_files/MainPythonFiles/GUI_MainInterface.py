@@ -132,7 +132,7 @@ class Ui_Main_Interface(object):
 
         #Button settings
         self.ButtonSettings = QtWidgets.QPushButton(self.centralwidget)
-        self.ButtonSettings.setGeometry(QtCore.QRect(640, 480, 51, 41))
+        self.ButtonSettings.setGeometry(QtCore.QRect(70, 480, 51, 41))
         self.ButtonSettings.setText("")
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap("Images\\SettingsIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -158,7 +158,7 @@ class Ui_Main_Interface(object):
         self.label.adjustSize()
 
         self.GameToolbox = QtWidgets.QPushButton(self.centralwidget)
-        self.GameToolbox.setGeometry(QtCore.QRect(70, 480, 51, 41))
+        self.GameToolbox.setGeometry(QtCore.QRect(130, 480, 51, 41))
         self.GameToolbox.setText("")
         icon9 = QtGui.QIcon()
         icon9.addPixmap(QtGui.QPixmap("Images\\ToolBox.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)

@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from SettingsSelector import SelectedColor
+from SettingsSelector import SelectedColor,SelectedButtonColor
 from tictac import Tic_Tac_Toe
 
 class Ui_ToolBox(object):
@@ -17,20 +17,29 @@ class Ui_ToolBox(object):
         self.Game1 = QtWidgets.QPushButton(Form)
         self.Game1.setGeometry(QtCore.QRect(100, 200, 75, 61))
         self.Game1.setObjectName("Game1")
+        self.Game1.setStyleSheet(SelectedButtonColor)
 
         self.Game2 = QtWidgets.QPushButton(Form)
         self.Game2.setGeometry(QtCore.QRect(250, 200, 75, 61))
         self.Game2.setObjectName("Game2")
+        self.Game2.setStyleSheet(SelectedButtonColor)
 
         self.Game3 = QtWidgets.QPushButton(Form)
         self.Game3.setGeometry(QtCore.QRect(400, 200, 75, 61))
         self.Game3.setObjectName("Game3")
+        self.Game3.setStyleSheet(SelectedButtonColor)
         self.Game4 = QtWidgets.QPushButton(Form)
         self.Game4.setGeometry(QtCore.QRect(550, 200, 75, 61))
         self.Game4.setObjectName("Game4")
+        self.Game4.setStyleSheet(SelectedButtonColor)
 
         self.BackButton = QtWidgets.QPushButton(Form)
         self.BackButton.setGeometry(QtCore.QRect(10, 10, 41, 41))
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("Images\BackArrow.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.BackButton.setIcon(icon1)
+        self.BackButton.setIconSize(QtCore.QSize(36, 180))
+        self.BackButton.setStyleSheet(SelectedButtonColor)
         self.BackButton.setText("")
         self.BackButton.setObjectName("BackButton")
 

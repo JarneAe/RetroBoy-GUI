@@ -36,24 +36,24 @@ with open("json_files\Settings.json") as json_file:
 
 
     if (data["ButtonColor"] == 'Default'):
-        SelectedButtonColor = "background-color:rgb(255, 255, 255);"
+        SelectedButtonColor = "background-color:rgb(255, 255, 255);""border-radius: 7px;"
         print("default color found")
 
     elif(isinstance(data["ButtonColor"],list)):
         print(data["ButtonColor"])
         colors = data["ButtonColor"]
-        SelectedButtonColor = "background-color:rgb({0},{1},{2})".format(colors[0],colors[1],colors[2])
+        SelectedButtonColor = f"background-color:rgb({colors[0]},{colors[1]},{colors[2]});""border-radius: 7px;"
         print("list found")
 
     elif(isinstance(data["ButtonColor"],str)):
         if data["ButtonColor"] != 'Custom':
             print("str found")
-            print(data["ButtonColor"])
-            SelectedButtonColor = "background-color:rgb({});".format(data["ButtonColor"])
+            color = data["ButtonColor"]
+            SelectedButtonColor = f"background-color:rgb({color});""border-radius: 7px;"
         else:
-            SelectedButtonColor = "background-color:rgb(71, 82, 99);"  
+            SelectedButtonColor = "background-color:rgb(71, 82, 99);""border-radius: 7px;"  
     else:
-        SelectedButtonColor = "background-color:rgb(71, 82, 99);"
+        SelectedButtonColor = "background-color:rgb(71, 82, 99);""border-radius: 7px;"
 
 
 
