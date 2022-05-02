@@ -164,6 +164,8 @@ class Ui_Settings(object):
     def Random_Color(self):
         RGB = f'{random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)}'
         PushBColor(RGB)
+        RGB = f'{random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)}'
+        PushButtonColor(RGB)
         self.label.setText(("Changes will be applied after the app has been restarted."))
         self.label.adjustSize()
 

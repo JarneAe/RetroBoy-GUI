@@ -9,7 +9,6 @@ with open("json_files\Settings.json") as json_file:
 
 #checks what color is selected for background
     if data["BColor"] == 'Dark':
-        print('Dark color found')
         SelectedColor = "background-color:rgb(71, 82, 99);"
 
     elif(data["BColor"] == 'Light'):
@@ -22,12 +21,9 @@ with open("json_files\Settings.json") as json_file:
         print(data["BColor"])
         colors = data["BColor"]
         SelectedColor = "background-color:rgb({0},{1},{2})".format(colors[0],colors[1],colors[2])
-        print("list found")
 
     elif(isinstance(data["BColor"],str)):
         if data["BColor"] != 'Custom':
-            print("str found")
-            print(data["BColor"])
             SelectedColor = "background-color:rgb({});".format(data["BColor"])
         else:
             SelectedColor = "background-color:rgb(71, 82, 99);"  
@@ -47,7 +43,6 @@ with open("json_files\Settings.json") as json_file:
 
     elif(isinstance(data["ButtonColor"],str)):
         if data["ButtonColor"] != 'Custom':
-            print("str found")
             color = data["ButtonColor"]
             SelectedButtonColor = f"background-color:rgb({color});""border-radius: 7px;"
         else:
