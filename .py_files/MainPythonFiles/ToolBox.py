@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from SettingsSelector import SelectedColor,SelectedButtonColor
 from tictac import Tic_Tac_Toe
+from Colors import root
 
 class Ui_ToolBox(object):
 
@@ -8,6 +9,8 @@ class Ui_ToolBox(object):
             game_instance = Tic_Tac_Toe()
             game_instance.mainloop()
 
+    def LaunchColor(self):
+        print("test")
  
 
     def setupUi(self, Form):
@@ -49,6 +52,7 @@ class Ui_ToolBox(object):
 
         self.BackButton.clicked.connect(lambda: Form.close())
         self.Game2.clicked.connect(self.LaunchTicTac)
+        self.Game4.clicked.connect(self.LaunchColor)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
