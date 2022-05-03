@@ -1,200 +1,222 @@
-from asyncio.constants import SENDFILE_FALLBACK_READBUFFER_SIZE
 from tkinter import *
-import numpy as np
-
-size_of_board = 600
-symbol_size = (size_of_board / 3 - size_of_board / 8) / 2
-symbol_thickness = 50
-symbol_X_color = '#EE4035'
-symbol_O_color = '#0492CF'
-Green_color = '#7BC043'
-
-
-class Tic_Tac_Toe():
-
-    def __init__(self):
-        self.window = Tk()
-        self.window.title('Tic-Tac-Toe')
-        self.canvas = Canvas(self.window, width=size_of_board, height=size_of_board)
-        self.canvas.pack()
-        # Input from user in form of clicks
-        self.window.bind('<Button-1>', self.click)
-
-        self.initialize_board()
-        self.player_X_turns = True
-        self.board_status = np.zeros(shape=(3, 3))
-
-        self.player_X_starts = True
-        self.reset_board = False
-        self.gameover = False
-        self.tie = False
-        self.X_wins = False
-        self.O_wins = False
-
-        self.X_score = 0
-        self.O_score = 0
-        self.tie_score = 0
-
-    def mainloop(self):
-        self.window.mainloop()
-
-    def initialize_board(self):
-        for i in range(2):
-            self.canvas.create_line((i + 1) * size_of_board / 3, 0, (i + 1) * size_of_board / 3, size_of_board)
-
-        for i in range(2):
-            self.canvas.create_line(0, (i + 1) * size_of_board / 3, size_of_board, (i + 1) * size_of_board / 3)
-
-    def play_again(self):
-        self.initialize_board()
-        self.player_X_starts = not self.player_X_starts
-        self.player_X_turns = self.player_X_starts
-        self.board_status = np.zeros(shape=(3, 3))
-
-
-    def draw_O(self, logical_position):
-        logical_position = np.array(logical_position)
-        # logical_position = grid value on the board
-        # grid_position = actual pixel values of the center of the grid
-        grid_position = self.convert_logical_to_grid_position(logical_position)
-        self.canvas.create_oval(grid_position[0] - symbol_size, grid_position[1] - symbol_size,
-                                grid_position[0] + symbol_size, grid_position[1] + symbol_size, width=symbol_thickness,
-                                outline=symbol_O_color)
-
-    def draw_X(self, logical_position):
-        grid_position = self.convert_logical_to_grid_position(logical_position)
-        self.canvas.create_line(grid_position[0] - symbol_size, grid_position[1] - symbol_size,
-                                grid_position[0] + symbol_size, grid_position[1] + symbol_size, width=symbol_thickness,
-                                fill=symbol_X_color)
-        self.canvas.create_line(grid_position[0] - symbol_size, grid_position[1] + symbol_size,
-                                grid_position[0] + symbol_size, grid_position[1] - symbol_size, width=symbol_thickness,
-                                fill=symbol_X_color)
-
-    def display_gameover(self):
-
-        if self.X_wins:
-            self.X_score += 1
-            text = 'Winner: P1 (X)'
-            color = symbol_X_color
-        elif self.O_wins:
-            self.O_score += 1
-            text = 'Winner: P2 (O)'
-            color = symbol_O_color
-        else:
-            self.tie_score += 1
-            text = 'Its a tie'
-            color = 'gray'
-
-        self.canvas.delete("all")
-        self.canvas.create_text(size_of_board / 2, size_of_board / 3, font="cmr 60 bold", fill=color, text=text)
-
-        score_text = 'Scores \n'
-        self.canvas.create_text(size_of_board / 2, 5 * size_of_board / 8, font="cmr 40 bold", fill=Green_color,
-                                text=score_text)
-
-        score_text = 'Player 1 (X) : ' + str(self.X_score) + '\n'
-        score_text += 'Player 2 (O): ' + str(self.O_score) + '\n'
-        score_text += 'Tie: ' + str(self.tie_score)
-        self.canvas.create_text(size_of_board / 2, 3 * size_of_board / 4, font="cmr 30 bold", fill=Green_color,
-                                text=score_text)
-        self.reset_board = True
-
-        score_text = 'Click to play again \n'
-        self.canvas.create_text(size_of_board / 2, 15 * size_of_board / 16, font="cmr 20 bold", fill="gray",
-                                text=score_text)
-
-
-    def convert_logical_to_grid_position(self, logical_position):
-        logical_position = np.array(logical_position, dtype=int)
-        return (size_of_board / 3) * logical_position + size_of_board / 6
-
-    def convert_grid_to_logical_position(self, grid_position):
-        grid_position = np.array(grid_position)
-        return np.array(grid_position // (size_of_board / 3), dtype=int)
-
-    def is_grid_occupied(self, logical_position):
-        if self.board_status[logical_position[0]][logical_position[1]] == 0:
-            return False
-        else:
-            return True
-
-    def is_winner(self, player):
-
-        player = -1 if player == 'X' else 1
-
-        # Three in a row
-        for i in range(3):
-            if self.board_status[i][0] == self.board_status[i][1] == self.board_status[i][2] == player:
-                return True
-            if self.board_status[0][i] == self.board_status[1][i] == self.board_status[2][i] == player:
-                return True
-
-        # Diagonals
-        if self.board_status[0][0] == self.board_status[1][1] == self.board_status[2][2] == player:
-            return True
-
-        if self.board_status[0][2] == self.board_status[1][1] == self.board_status[2][0] == player:
-            return True
-
-        return False
-
-    def is_tie(self):
-
-        r, c = np.where(self.board_status == 0)
-        tie = False
-        if len(r) == 0:
-            tie = True
-
-        return tie
-
-    def is_gameover(self):
-        # Either someone wins or all grid occupied
-        self.X_wins = self.is_winner('X')
-        if not self.X_wins:
-            self.O_wins = self.is_winner('O')
-
-        if not self.O_wins:
-            self.tie = self.is_tie()
-
-        gameover = self.X_wins or self.O_wins or self.tie
-
-        if self.X_wins:
-            print('X wins')
-        if self.O_wins:
-            print('O wins')
-        if self.tie:
-            print('Its a tie')
-
-        return gameover
+from tkinter import messagebox
 
 
 
+# X starts so true
+clicked = True
+count = 0
+
+# disable all the buttons
+def disable_all_buttons():
+	b1.config(state=DISABLED)
+	b2.config(state=DISABLED)
+	b3.config(state=DISABLED)
+	b4.config(state=DISABLED)
+	b5.config(state=DISABLED)
+	b6.config(state=DISABLED)
+	b7.config(state=DISABLED)
+	b8.config(state=DISABLED)
+	b9.config(state=DISABLED)
+
+# Check to see if someone won
+def checkifwon():
+	global winner
+	winner = False
+
+	if b1["text"] == "X" and b2["text"] == "X" and b3["text"]  == "X":
+		b1.config(bg="red")
+		b2.config(bg="red")
+		b3.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+	elif b4["text"] == "X" and b5["text"] == "X" and b6["text"]  == "X":
+		b4.config(bg="red")
+		b5.config(bg="red")
+		b6.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+
+	elif b7["text"] == "X" and b8["text"] == "X" and b9["text"]  == "X":
+		b7.config(bg="red")
+		b8.config(bg="red")
+		b9.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+
+	elif b1["text"] == "X" and b4["text"] == "X" and b7["text"]  == "X":
+		b1.config(bg="red")
+		b4.config(bg="red")
+		b7.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+
+	elif b2["text"] == "X" and b5["text"] == "X" and b8["text"]  == "X":
+		b2.config(bg="red")
+		b5.config(bg="red")
+		b8.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+
+	elif b3["text"] == "X" and b6["text"] == "X" and b9["text"]  == "X":
+		b3.config(bg="red")
+		b6.config(bg="red")
+		b9.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+
+	elif b1["text"] == "X" and b5["text"] == "X" and b9["text"]  == "X":
+		b1.config(bg="red")
+		b5.config(bg="red")
+		b9.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+
+	elif b3["text"] == "X" and b5["text"] == "X" and b7["text"]  == "X":
+		b3.config(bg="red")
+		b5.config(bg="red")
+		b7.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  X Wins!!")
+		disable_all_buttons()
+
+	#### CHECK FOR O's Win
+	elif b1["text"] == "O" and b2["text"] == "O" and b3["text"]  == "O":
+		b1.config(bg="red")
+		b2.config(bg="red")
+		b3.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+	elif b4["text"] == "O" and b5["text"] == "O" and b6["text"]  == "O":
+		b4.config(bg="red")
+		b5.config(bg="red")
+		b6.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+
+	elif b7["text"] == "O" and b8["text"] == "O" and b9["text"]  == "O":
+		b7.config(bg="red")
+		b8.config(bg="red")
+		b9.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+
+	elif b1["text"] == "O" and b4["text"] == "O" and b7["text"]  == "O":
+		b1.config(bg="red")
+		b4.config(bg="red")
+		b7.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+
+	elif b2["text"] == "O" and b5["text"] == "O" and b8["text"]  == "O":
+		b2.config(bg="red")
+		b5.config(bg="red")
+		b8.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+
+	elif b3["text"] == "O" and b6["text"] == "O" and b9["text"]  == "O":
+		b3.config(bg="red")
+		b6.config(bg="red")
+		b9.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+
+	elif b1["text"] == "O" and b5["text"] == "O" and b9["text"]  == "O":
+		b1.config(bg="red")
+		b5.config(bg="red")
+		b9.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+
+	elif b3["text"] == "O" and b5["text"] == "O" and b7["text"]  == "O":
+		b3.config(bg="red")
+		b5.config(bg="red")
+		b7.config(bg="red")
+		winner = True
+		messagebox.showinfo("Tic Tac Toe", "CONGRATULATIONS!  O Wins!!")
+		disable_all_buttons()
+
+	# Check if tie
+	if count == 9 and winner == False:
+		messagebox.showinfo("Tic Tac Toe", "It's A Tie!\n No One Wins!")
+		disable_all_buttons()
+				
+# Button clicked function
+def b_click(b):
+	global clicked, count
+
+	if b["text"] == " " and clicked == True:
+		b["text"] = "X"
+		clicked = False
+		count += 1
+		checkifwon()
+	elif b["text"] == " " and clicked == False:
+		b["text"] = "O"
+		clicked = True
+		count += 1
+		checkifwon()
+	else:
+		messagebox.showerror("Tic Tac Toe", "Hey! That box has already been selected\nPick Another Box..." )
+
+# Start the game over!
+def reset(root):
+	global b1, b2, b3, b4, b5, b6, b7, b8, b9
+	global clicked, count
+	clicked = True
+	count = 0
+
+	# Build our buttons
+	b1 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b1))
+	b2 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b2))
+	b3 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b3))
+
+	b4 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b4))
+	b5 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b5))
+	b6 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b6))
+
+	b7 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b7))
+	b8 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b8))
+	b9 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b9))
+
+	# Grid our buttons to the screen
+	b1.grid(row=0, column=0)
+	b2.grid(row=0, column=1)
+	b3.grid(row=0, column=2)
+
+	b4.grid(row=1, column=0)
+	b5.grid(row=1, column=1)
+	b6.grid(row=1, column=2)
+
+	b7.grid(row=2, column=0)
+	b8.grid(row=2, column=1)
+	b9.grid(row=2, column=2)
+
+# Create menue
+def RunGame():
+    root = Tk()
+    root.title('Tic-Tac-Toe')
+    my_menu = Menu(root)
+    root.config(menu=my_menu)
+
+    reset(root)
+
+    root.mainloop()
 
 
-    def click(self, event):
-        grid_position = [event.x, event.y]
-        logical_position = self.convert_grid_to_logical_position(grid_position)
-
-        if not self.reset_board:
-            if self.player_X_turns:
-                if not self.is_grid_occupied(logical_position):
-                    self.draw_X(logical_position)
-                    self.board_status[logical_position[0]][logical_position[1]] = -1
-                    self.player_X_turns = not self.player_X_turns
-            else:
-                if not self.is_grid_occupied(logical_position):
-                    self.draw_O(logical_position)
-                    self.board_status[logical_position[0]][logical_position[1]] = 1
-                    self.player_X_turns = not self.player_X_turns
-
-            # Check if game is concluded
-            if self.is_gameover():
-                self.display_gameover()
-                # print('Done')
-        else:  # Play Again
-            self.canvas.delete("all")
-            self.play_again()
-            self.reset_board = False
-
-
-
+if __name__ == '__Main__':
+    RunGame()
