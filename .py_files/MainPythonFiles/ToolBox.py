@@ -1,16 +1,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from SettingsSelector import SelectedColor,SelectedButtonColor
-from tictac import Tic_Tac_Toe
-from Colors import root
-
+from tictac import RunGame
+from NumberGuess import RunGuessingGame
 class Ui_ToolBox(object):
 
     def LaunchTicTac(self):
-            game_instance = Tic_Tac_Toe()
-            game_instance.mainloop()
+        RunGame()
+            
 
-    def LaunchColor(self):
-        print("test")
+    def GuessingGame(self):
+        RunGuessingGame()
+
  
 
     def setupUi(self, Form):
@@ -52,7 +52,7 @@ class Ui_ToolBox(object):
 
         self.BackButton.clicked.connect(lambda: Form.close())
         self.Game2.clicked.connect(self.LaunchTicTac)
-        self.Game4.clicked.connect(self.LaunchColor)
+        self.Game4.clicked.connect(self.GuessingGame)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -63,7 +63,7 @@ class Ui_ToolBox(object):
         self.Game1.setText(_translate("Form", "Snake"))
         self.Game2.setText(_translate("Form", "OXO"))
         self.Game3.setText(_translate("Form", "Dots \'n Boxes"))
-        self.Game4.setText(_translate("Form", "?"))
+        self.Game4.setText(_translate("Form", "Guess"))
 
 
 if __name__ == "__main__":
